@@ -1,18 +1,21 @@
 .hero {
-  height: 70vh;
+  height: 95vh; /* mais alto */
+
+  margin: 90px 20px 0 20px;
 
   display: flex;
   align-items: flex-end;
   justify-content: center;
 
-  padding-bottom: 40px;
+  padding: 40px;
 
   background: 
-    linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.5)),
-    url('/img/hero.png') center/cover no-repeat;
+    linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.4)),
+    url('/img/hero.png') center 10% / cover no-repeat;
 
-  border-bottom-left-radius: 30px;
-  border-bottom-right-radius: 30px;
+  border-radius: 30px;
 
   overflow: hidden;
+
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
 }
