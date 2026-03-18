@@ -1,5 +1,11 @@
 import Header from "./components/Header"
 import Hero from "./components/Hero"
+import Sobre from "./components/Sobre"
+import Helen from "./components/Helen"
+import Thamy from "./components/Thamy"
+import Wilza from "./components/Wilza"
+import Localizacao from "./components/Localizacao"
+import Footer from "./components/Footer"
 import Contact from "./Contact"
 
 import "./styles/main.css"
@@ -10,18 +16,19 @@ function App() {
       <Header />
 
       <Hero />
+      
+      <Sobre />
 
-      <section id="servicos" style={{ height: "100vh", padding: "50px" }}>
-        <h2>Serviços</h2>
-      </section>
+      <Thamy />
 
-      <section id="sobre" style={{ height: "100vh", padding: "50px" }}>
-        <h2>Sobre</h2>
-      </section>
+      <Helen />
 
-      <section id="contacto" style={{ height: "100vh", padding: "50px" }}>
-        <h2>Contacto</h2>
-      </section>
+      <Wilza />
+
+      <Localizacao />
+
+      <Footer />
+
     </>
   )
 }

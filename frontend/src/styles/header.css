@@ -1,3 +1,11 @@
+:root {
+  --primary: #6fbf73;   /* verde suave */
+  --secondary: #f5e6d3; /* bege */
+  --dark: #2c2c2c;
+  --white: #ffffff;
+}
+
+/* ================= HEADER ================= */
 .header {
   position: fixed;
   width: 100%;
@@ -9,30 +17,50 @@
   align-items: center;
 
   padding: 15px 8%;
-  background: rgba(255,255,255,0.9);
-  backdrop-filter: blur(10px);
 
-  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+  background: var(--secondary); /* bege */
+  box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+
+  transition: 0.3s;
 }
 
 /* LOGO */
 .logo {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: bold;
   color: var(--primary);
+  letter-spacing: 1px;
 }
 
 /* NAV */
 .nav {
   display: flex;
-  gap: 25px;
+  gap: 30px;
+  align-items: center;
 }
 
 .nav a {
   text-decoration: none;
   color: var(--dark);
   font-weight: 500;
+  position: relative;
   transition: 0.3s;
+}
+
+/* LINHA ANIMADA */
+.nav a::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  left: 0;
+  bottom: -5px;
+  background: var(--primary);
+  transition: 0.3s;
+}
+
+.nav a:hover::after {
+  width: 100%;
 }
 
 .nav a:hover {
@@ -43,12 +71,20 @@
 .btn-header {
   background: var(--primary);
   color: white;
-  padding: 10px 18px;
+  padding: 10px 22px;
   border-radius: 999px;
   font-weight: bold;
+
+  box-shadow: 0 8px 20px rgba(111,191,115,0.3);
+  transition: 0.3s;
 }
 
-/* MOBILE */
+.btn-header:hover {
+  transform: translateY(-2px);
+  background: #5aa861;
+}
+
+/* ================= MOBILE ================= */
 @media (max-width: 768px) {
   .nav {
     display: none;

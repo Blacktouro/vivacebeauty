@@ -1,0 +1,65 @@
+.localizacao {
+  padding: 100px 8%;
+  background: #f5e6d3;
+}
+
+.localizacao-container {
+  display: flex;
+  gap: 60px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* TEXTO */
+.localizacao-texto {
+  flex: 1;
+  min-width: 300px;
+}
+
+.localizacao-texto h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+  color: #2c2c2c;
+}
+
+.localizacao-texto p {
+  margin-bottom: 15px;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* BOTÃO */
+.btn-mapa {
+  display: inline-block;
+  margin-top: 15px;
+  background: #6fbf73;
+  color: white;
+  padding: 12px 25px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.btn-mapa:hover {
+  background: #5aa861;
+  transform: translateY(-2px);
+}
+
+/* MAPA */
+.localizacao-mapa {
+  flex: 1;
+  min-width: 300px;
+}
+
+.localizacao-mapa iframe {
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .localizacao-container {
+    flex-direction: column;
+  }
+}
