@@ -19,7 +19,7 @@ function Footer() {
         <div className="footer-col">
           <h4>Contactos</h4>
           <p>📍 R. do Lapadusso 28, Peniche</p>
-          <p>📞 +351 912 345 678</p>
+          <p>📞 +351 919 828 555</p>
           <p>✉️ vivacebeauty@email.com</p>
         </div>
 
