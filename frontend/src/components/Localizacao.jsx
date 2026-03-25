@@ -18,7 +18,7 @@ function Localizacao() {
           Portugal</p>
 
           <p><strong>Telefone:</strong><br/>
-          +351 912 345 678</p>
+          +351 919 828 555</p>
 
           <p><strong>Email:</strong><br/>
           vivacebeauty@email.com</p>
