@@ -1,0 +1,85 @@
+.pestanas {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  min-height: 100vh;
+
+  padding: 80px;
+
+  background: #ECEBE7;
+}
+
+
+
+.destaque {
+  font-size: 20px;
+  font-weight: 600;
+  color: #a66a5b;
+}
+
+.chamada {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+/* TEXTO */
+.pestanas-texto {
+  width: 50%;
+}
+
+.pestanas-texto h2 {
+  font-size: 42px;
+  color: #a66a5b;
+  margin-bottom: 20px;
+}
+
+.pestanas-texto p {
+  font-size: 18px;
+  color: #7a5a50;
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+
+/* BOTÃO */
+.btn-marcar {
+  display: inline-block;
+  margin-top: 25px;
+
+  background: #a66a5b;
+  color: white;
+
+  padding: 15px 35px;
+  border-radius: 30px;
+
+  font-weight: bold;
+  text-decoration: none;
+
+  transition: 0.3s;
+}
+
+.btn-marcar:hover {
+  background: #8b5648;
+  transform: scale(1.05);
+}
+
+/* IMAGEM */
+.pestanas-img {
+  width: 50%; /* metade da secção */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 40px 0; /* espaço top e bottom */
+}
+
+/* IMAGEM EM SI */
+.pestanas-img img {
+  width: 100%;
+  max-width: 800px; /* aumenta tamanho máximo */
+
+  border-radius: 20px;
+
+  box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+}

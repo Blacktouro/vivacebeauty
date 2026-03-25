@@ -8,16 +8,28 @@ function Helen() {
 
         <div className="team-text">
           <h2>Helen Souza</h2>
-          <h3>Estética</h3>
+          <h3>Estética & Cuidados de Beleza</h3>
 
           <p>
-            Especialista em cuidados de pele e tratamentos estéticos,
-            Helen dedica-se a realçar a beleza natural de cada cliente.
+            Helen é especialista em cuidados de pés, proporcionando tratamentos
+            completos que garantem conforto, saúde e bem-estar.
           </p>
 
           <p>
-            Com técnicas modernas e atenção ao detalhe, proporciona
-            experiências únicas focadas no bem-estar e autoestima.
+            Atua também na depilação a cera e epilação com linha,
+            com foco em sobrancelhas e buço, garantindo precisão,
+            delicadeza e um acabamento natural.
+          </p>
+
+          <p>
+            Na área de unhas, trabalha com fibra de vidro e extensão de gel,
+            criando resultados elegantes, resistentes e personalizados.
+          </p>
+
+          <p>
+            O seu compromisso é oferecer um atendimento de excelência,
+            realçando a beleza natural de cada cliente com técnicas modernas
+            e atenção ao detalhe.
           </p>
 
         </div>

@@ -8,16 +8,22 @@ function Thamy() {
 
         <div className="team-text">
           <h2>Thamy Ferreira</h2>
-          <h3>Estética</h3>
+          <h3>Estética & Beleza</h3>
 
           <p>
-            Thamy é apaixonada por beleza e bem-estar, focando-se em
-            tratamentos personalizados para cada cliente.
+            Thamy é especialista em unhas de gel e extensão, criando resultados
+            elegantes, duradouros e totalmente personalizados para cada cliente.
           </p>
 
           <p>
-            O seu objetivo é garantir resultados visíveis e uma experiência
-            relaxante e profissional.
+            Também atua na área de maquilhagem profissional para noivas,
+            garantindo um look perfeito, sofisticado e à prova de emoções
+            para um dos dias mais importantes da sua vida.
+          </p>
+
+          <p>
+            O seu foco é proporcionar uma experiência única, combinando técnica,
+            cuidado e atenção ao detalhe para realçar a beleza natural de cada mulher.
           </p>
         </div>
 

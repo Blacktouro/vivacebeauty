@@ -8,21 +8,29 @@ function Wilza() {
 
         <div className="team-text">
           <h2>Wilza</h2>
-          <h3>Cabeleireiro</h3>
+          <h3>Cabeleireira Profissional</h3>
 
           <p>
-            Wilza é especialista em cortes modernos, coloração e
-            transformação de imagem.
+            Wilza é especialista em cabelos, oferecendo serviços completos
+            como cortes modernos, escovas, madeixas e loiros personalizados,
+            adaptados ao estilo de cada cliente.
           </p>
 
           <p>
-            Com experiência e paixão pelo que faz, ajuda cada cliente
-            a encontrar o estilo perfeito.
+            Trabalha também com tratamentos capilares avançados,
+            incluindo cronograma capilar e progressiva, garantindo fios
+            mais saudáveis, brilhantes e alinhados.
           </p>
+
+          <p>
+            O seu foco é transformar não só o cabelo, mas também a
+            autoestima, proporcionando resultados elegantes e duradouros.
+          </p>
+
         </div>
 
         <div className="team-image">
-          <img src="../img/wilza.png" alt="Wilza" />
+          <img src="../img/wilza.jpeg" alt="Wilza" />
         </div>
 
       </div>

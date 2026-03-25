@@ -6,9 +6,10 @@ import Thamy from "./components/Thamy"
 import Wilza from "./components/Wilza"
 import Localizacao from "./components/Localizacao"
 import Footer from "./components/Footer"
-import Contact from "./Contact"
+import Pestanas from "./components/Pestanas"
 
 import "./styles/main.css"
+
 
 function App() {
   return (
@@ -16,6 +17,8 @@ function App() {
       <Header />
 
       <Hero />
+
+      <Pestanas />
       
       <Sobre />
 
