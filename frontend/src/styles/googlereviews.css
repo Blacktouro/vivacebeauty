@@ -1,0 +1,234 @@
+/* ===========================
+   GOOGLE REVIEWS
+   Segue a linguagem visual das secções de equipa
+   (fundo escuro, cartões translúcidos, accent + label).
+   Define aqui a cor da secção via --accent / --accent-soft.
+=========================== */
+
+.reviews-section {
+  --accent: #e2836a;
+  --accent-soft: rgba(226, 131, 106, 0.25);
+
+  padding: 110px 0;
+  color: #ffffff;
+  background: #0f0f0f;
+  overflow: hidden;
+}
+
+.reviews-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ===========================
+   CABEÇALHO
+=========================== */
+
+.reviews-header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.reviews-header .section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.reviews-header .section-label::before {
+  content: "";
+  width: 24px;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+.reviews-header h2 {
+  margin: 16px 0 18px;
+  font-size: clamp(32px, 4.5vw, 48px);
+  letter-spacing: -1.5px;
+  line-height: 1.1;
+}
+
+.reviews-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.reviews-rating svg {
+  width: 16px;
+  height: 16px;
+}
+
+.reviews-rating strong {
+  color: #ffffff;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.reviews-stars {
+  display: inline-flex;
+  gap: 2px;
+}
+
+.reviews-stars svg {
+  width: 15px;
+  height: 15px;
+  fill: #e8b544;
+}
+
+/* ===========================
+   CARROSSEL
+=========================== */
+
+.reviews-track-wrap {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 6%,
+    #000 94%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 6%,
+    #000 94%,
+    transparent
+  );
+}
+
+.reviews-track {
+  display: flex;
+  gap: 20px;
+  width: max-content;
+  animation: reviews-scroll 34s linear infinite;
+}
+
+.reviews-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes reviews-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.reviews-card {
+  flex: 0 0 auto;
+  width: 300px;
+  padding: 28px 26px 22px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  transition: border-color 0.3s, background 0.3s;
+}
+
+.reviews-card:hover {
+  border-color: var(--accent-soft);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.reviews-quote-mark {
+  display: block;
+  margin-bottom: 6px;
+  font-family: Georgia, serif;
+  font-size: 42px;
+  line-height: 1;
+  color: var(--accent);
+  opacity: 0.55;
+}
+
+.reviews-card p {
+  min-height: 88px;
+  margin: 0 0 18px;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.reviews-card-footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.reviews-card-footer svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+/* ===========================
+   CTA
+=========================== */
+
+.reviews-cta {
+  text-align: center;
+  margin-top: 44px;
+}
+
+.reviews-cta a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 3px;
+  border-bottom: 1px solid var(--accent);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.3s, border-color 0.3s;
+}
+
+.reviews-cta a:hover {
+  color: var(--accent);
+}
+
+/* ===========================
+   RESPONSIVO
+=========================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .reviews-track {
+    animation: none;
+    overflow-x: auto;
+  }
+}
+
+@media (max-width: 900px) {
+  .reviews-card {
+    width: 260px;
+  }
+}
+
+@media (max-width: 580px) {
+  .reviews-section {
+    padding: 75px 0;
+  }
+
+  .reviews-header {
+    margin-bottom: 40px;
+  }
+
+  .reviews-card {
+    width: 230px;
+    padding: 22px 20px 18px;
+  }
+}

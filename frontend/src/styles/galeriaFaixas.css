@@ -1,0 +1,152 @@
+/* ===========================
+   GALERIA — FAIXAS A PASSAR
+=========================== */
+
+.faixas-section {
+  --accent: #e2836a;
+
+  padding: 110px 0 100px;
+  background: #0f0f0f;
+  color: #ffffff;
+  overflow: hidden;
+}
+
+/* ===========================
+   CABEÇALHO
+=========================== */
+
+.faixas-header {
+  text-align: center;
+  max-width: 1100px;
+  margin: 0 auto 48px;
+  padding: 0 24px;
+}
+
+.faixas-header .section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.faixas-header .section-label::before {
+  content: "";
+  width: 24px;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+.faixas-header h2 {
+  margin: 16px 0 0;
+  font-size: clamp(32px, 4.5vw, 48px);
+  letter-spacing: -1.5px;
+  line-height: 1.1;
+}
+
+/* ===========================
+   FILAS
+=========================== */
+
+.faixas-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.faixas-row-wrap {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 6%,
+    #000 94%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 6%,
+    #000 94%,
+    transparent
+  );
+}
+
+.faixas-row {
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  animation: faixas-scroll-left 38s linear infinite;
+}
+
+.faixas-row--right {
+  animation-name: faixas-scroll-right;
+}
+
+.faixas-row:hover {
+  animation-play-state: paused;
+}
+
+@keyframes faixas-scroll-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes faixas-scroll-right {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.faixas-item {
+  flex: 0 0 auto;
+  width: 220px;
+  height: 280px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.faixas-item img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ===========================
+   RESPONSIVO
+=========================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .faixas-row {
+    animation: none;
+    overflow-x: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .faixas-section {
+    padding: 75px 0 70px;
+  }
+
+  .faixas-item {
+    width: 160px;
+    height: 210px;
+  }
+
+  .faixas-rows {
+    gap: 10px;
+  }
+}

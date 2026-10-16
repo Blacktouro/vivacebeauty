@@ -1,18 +1,132 @@
 :root {
+  /* Cores */
   --primary: #6fbf73;
   --secondary: #f5e6d3;
   --dark: #2c2c2c;
   --white: #ffffff;
+
+  /* Tokens de apoio — usa-os nos componentes em vez de valores soltos,
+     para manteres consistência entre secções */
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 25px;
+  --radius-pill: 40px;
+
+  --shadow-md: 0 20px 40px rgba(0, 0, 0, 0.25);
+  --shadow-lg: 0 30px 60px rgba(0, 0, 0, 0.35);
+
+  --transition: 0.3s ease;
+
+  --font-body: "Poppins", sans-serif;
 }
 
-/* RESET */
-* {
+/* ===========================
+   RESET
+=========================== */
+
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
 }
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100svh;
+  font-family: var(--font-body);
+  color: var(--dark);
+  background: var(--white);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* headings/parágrafos sem quebra de palavra estranha, texto mais legível */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  overflow-wrap: break-word;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.15;
+  font-weight: 600;
+}
+
+/* imagens e média responsivos por defeito */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* inputs herdam a fonte do body em vez da fonte do sistema */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+/* seleção de texto na cor da marca */
+::selection {
+  background: var(--primary);
+  color: var(--white);
+}
+
+/* foco visível só por teclado — acessibilidade sem "anel" no clique do rato */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+}
+
+/* respeita quem desativa animações no sistema operativo */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

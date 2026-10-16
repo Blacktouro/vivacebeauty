@@ -1,39 +1,376 @@
 .hero {
-  height: 95vh;
+  position: relative;
 
-  margin: 90px 20px 0 20px;
+  width: calc(100% - 40px);
+  min-height: calc(100vh - 115px);
+  margin: 24px auto;
 
   display: flex;
-  align-items: flex-end;
-  justify-content: center;
-
-  padding: 40px;
-
-  background: 
-    linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.4)),
-    url('../img/hero.png') center 10% / cover no-repeat;
-
-  border-radius: 30px;
+  align-items: center;
+  justify-content: flex-start;
 
   overflow: hidden;
 
-  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+  /* caminho absoluto a partir de /public — evita o aviso
+     "didn't resolve at build time" que aparecia no build */
+  background-image: url("/img/hero-beauty.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: #0d0d0e;
 
-  transition: 0.3s;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 34px;
+
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.28);
 }
-@media (max-width: 768px) {
+
+/* Fundo escuro para o texto ficar legível */
+
+.hero-overlay {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(7, 7, 8, 0.96) 0%,
+      rgba(7, 7, 8, 0.86) 27%,
+      rgba(7, 7, 8, 0.55) 48%,
+      rgba(7, 7, 8, 0.08) 76%
+    ),
+    linear-gradient(
+      0deg,
+      rgba(7, 7, 8, 0.42) 0%,
+      transparent 55%
+    );
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+
+  width: min(690px, 100%);
+  padding: clamp(45px, 7vw, 100px);
+
+  color: #ffffff;
+}
+
+/* Pequeno título */
+
+.hero-label {
+  margin-bottom: 22px;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+
+  color: #d7b984;
+
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.hero-label::before {
+  content: "";
+
+  width: 45px;
+  height: 1px;
+
+  background: #d7b984;
+}
+
+/* Título principal */
+
+.hero h1 {
+  max-width: 680px;
+  margin: 0 0 25px;
+
+  color: #ffffff;
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(48px, 6vw, 82px);
+  font-weight: 500;
+  line-height: 0.98;
+  letter-spacing: -3px;
+}
+
+.hero h1 span {
+  display: block;
+  margin-top: 8px;
+
+  color: #d7b984;
+}
+
+/* Descrição */
+
+.hero-content > p {
+  max-width: 610px;
+  margin: 0 0 34px;
+
+  color: rgba(255, 255, 255, 0.78);
+
+  font-size: clamp(17px, 1.6vw, 20px);
+  line-height: 1.7;
+}
+
+/* Botões */
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.hero-button {
+  min-height: 54px;
+  padding: 0 29px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  border-radius: 999px;
+
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1;
+  text-align: center;
+  text-decoration: none;
+
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.hero-button:hover {
+  transform: translateY(-3px);
+}
+
+.hero-button:focus-visible {
+  outline: 3px solid rgba(224, 198, 157, 0.55);
+  outline-offset: 4px;
+}
+
+.hero-button-primary {
+  color: #101011;
+  background: #ddc08c;
+  border: 1px solid #ddc08c;
+
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.25);
+}
+
+.hero-button-primary:hover {
+  color: #ffffff;
+  background: #a98757;
+  border-color: #a98757;
+
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.35);
+}
+
+.hero-button-secondary {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.hero-button-secondary:hover {
+  color: #101011;
+  background: #ffffff;
+  border-color: #ffffff;
+}
+
+/* Informação inferior */
+
+.hero-details {
+  max-width: 650px;
+  margin-top: 50px;
+  padding-top: 27px;
+
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.hero-details > div {
+  min-width: 0;
+  padding: 0 22px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.hero-details > div:first-child {
+  padding-left: 0;
+}
+
+.hero-details > div:last-child {
+  border-right: 0;
+}
+
+.hero-details strong {
+  color: #d7b984;
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 21px;
+  font-weight: 500;
+}
+
+.hero-details span {
+  color: rgba(255, 255, 255, 0.65);
+
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+/* Tablet */
+
+@media (max-width: 900px) {
   .hero {
-    height: 75vh; /* menor no mobile */
+    width: calc(100% - 24px);
+    min-height: 760px;
+    margin: 12px auto;
 
-    margin: 80px 10px 0 10px;
+    align-items: flex-end;
 
-    padding: 20px;
+    border-radius: 26px;
+    background-position: 63% center;
+  }
 
-    border-radius: 20px;
+  .hero-overlay {
+    background:
+      linear-gradient(
+        0deg,
+        rgba(7, 7, 8, 0.97) 0%,
+        rgba(7, 7, 8, 0.86) 44%,
+        rgba(7, 7, 8, 0.2) 78%,
+        rgba(7, 7, 8, 0.05) 100%
+      );
+  }
 
-    /* muda posição da imagem */
-    background: 
-      linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.5)),
-      url('/img/hero.png') center 25% / cover no-repeat;
+  .hero-content {
+    width: 100%;
+    padding: 50px 35px;
+  }
+
+  .hero h1 {
+    max-width: 600px;
+
+    font-size: clamp(45px, 9vw, 67px);
+  }
+}
+
+/* Telemóvel */
+
+@media (max-width: 580px) {
+  .hero {
+    width: calc(100% - 16px);
+    min-height: 690px;
+    margin: 8px auto;
+
+    border-radius: 22px;
+    background-position: 66% center;
+  }
+
+  .hero-content {
+    padding: 38px 22px;
+  }
+
+  .hero-label {
+    gap: 10px;
+
+    font-size: 10px;
+    letter-spacing: 2px;
+  }
+
+  .hero-label::before {
+    width: 28px;
+  }
+
+  .hero h1 {
+    margin-bottom: 20px;
+
+    font-size: clamp(40px, 12vw, 52px);
+    line-height: 1.02;
+    letter-spacing: -2px;
+  }
+
+  .hero-content > p {
+    margin-bottom: 27px;
+
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .hero-actions {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .hero-button {
+    width: 100%;
+  }
+
+  .hero-details {
+    margin-top: 34px;
+    padding-top: 22px;
+
+    grid-template-columns: 1fr;
+    gap: 17px;
+  }
+
+  .hero-details > div {
+    padding: 0 0 17px;
+
+    border-right: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .hero-details > div:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+}
+
+/* Telemóveis pequenos */
+
+@media (max-width: 380px) {
+  .hero {
+    min-height: 650px;
+  }
+
+  .hero-content {
+    padding: 32px 18px;
+  }
+
+  .hero h1 {
+    font-size: 37px;
+  }
+}
+
+/* Menos animações */
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-button {
+    transition: none;
+  }
+
+  .hero-button:hover {
+    transform: none;
   }
 }

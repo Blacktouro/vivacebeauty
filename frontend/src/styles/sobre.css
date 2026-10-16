@@ -1,104 +1,270 @@
-.sobre {
-  padding: 120px 8%;
-  background: linear-gradient(180deg, #f5e6d3 0%, #ffffff 100%);
+:root {
+  --bg: #0d0d0e;
+  --bg2: #161618;
+  --card: #1d1d20;
+
+  --gold: #c7aa7c;
+  --gold-light: #e0c69d;
+
+  --white: #ffffff;
+  --grey: #b3b3b3;
+
+  --border: rgba(255,255,255,.08);
 }
 
-/* CONTAINER */
-.sobre-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 80px;
-  flex-wrap: wrap;
+.sobre{
+    background: var(--bg);
+    color: var(--white);
+    padding:120px 0;
 }
 
-/* TEXTO */
-.sobre-texto {
-  flex: 1;
-  min-width: 320px;
+.sobre-container{
+    width:min(1200px,calc(100% - 50px));
+    margin:auto;
+
+    display:grid;
+    grid-template-columns:1.3fr .9fr;
+    gap:70px;
+    align-items:center;
 }
 
-.sobre-texto h2 {
-  font-size: 42px;
-  margin-bottom: 25px;
-  color: #2c2c2c;
-  position: relative;
+.sobre-etiqueta{
+    display:inline-block;
+    padding:8px 18px;
+    border:1px solid rgba(199,170,124,.35);
+    border-radius:999px;
+
+    color:var(--gold);
+    background:rgba(199,170,124,.08);
+
+    font-size:.85rem;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:2px;
+
+    margin-bottom:20px;
 }
 
-/* LINHA DECORATIVA */
-.sobre-texto h2::after {
-  content: "";
-  width: 60px;
-  height: 4px;
-  background: #6fbf73;
-  display: block;
-  margin-top: 10px;
-  border-radius: 10px;
+.sobre h2{
+    font-size:3rem;
+    line-height:1.15;
+    margin-bottom:25px;
 }
 
-.sobre-texto p {
-  font-size: 18px;
-  color: #555;
-  line-height: 1.8;
-  margin-bottom: 18px;
+.sobre h2 span{
+    color:var(--gold);
 }
 
-/* IMAGEM */
-.sobre-imagem {
-  flex: 1;
-  min-width: 320px;
-  position: relative;
+.sobre-introducao{
+    font-size:1.25rem;
+    color:var(--gold-light);
+    margin-bottom:35px;
 }
 
-/* EFEITO CARD */
-.sobre-imagem img {
-  width: 100%;
-  border-radius: 25px;
-  object-fit: cover;
-  box-shadow: 0 25px 60px rgba(0,0,0,0.12);
-  transition: 0.4s;
+.sobre-descricao{
+    display:flex;
+    flex-direction:column;
+    gap:22px;
 }
 
-/* HOVER PREMIUM */
-.sobre-imagem img:hover {
-  transform: scale(1.03);
+.sobre-descricao p{
+    color:var(--grey);
+    line-height:1.9;
+    font-size:1.02rem;
 }
 
-/* FUNDO DECORATIVO ATRÁS */
-.sobre-imagem::before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: #6fbf73;
-  top: 20px;
-  left: 20px;
-  border-radius: 25px;
-  z-index: -1;
-  opacity: 0.15;
+.sobre strong{
+    color:var(--white);
 }
 
-/* MOBILE */
-@media (max-width: 768px) {
-  .sobre {
-    padding: 80px 5%;
-  }
+.sobre-botao{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
 
-  .sobre-container {
-    flex-direction: column;
-    text-align: center;
-    gap: 40px;
-  }
+    margin-top:45px;
+    padding:16px 34px;
 
-  .sobre-texto h2 {
-    font-size: 32px;
-  }
+    background:var(--gold-light);
+    color:#111;
 
-  .sobre-texto p {
-    font-size: 16px;
-  }
+    text-decoration:none;
+    font-weight:700;
+    border-radius:999px;
 
-  .sobre-imagem::before {
-    display: none;
-  }
+    transition:.3s;
+}
+
+.sobre-botao:hover{
+    background:transparent;
+    color:var(--gold-light);
+    border:1px solid var(--gold-light);
+}
+
+.sobre-destaques{
+    display:flex;
+    flex-direction:column;
+    gap:25px;
+}
+
+.destaque-principal{
+    background:linear-gradient(180deg,#1d1d20,#141416);
+    border:1px solid var(--border);
+    border-radius:28px;
+    padding:40px;
+
+    backdrop-filter:blur(15px);
+}
+
+.destaque-simbolo{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    width:70px;
+    height:70px;
+
+    border-radius:50%;
+    background:rgba(199,170,124,.12);
+
+    color:var(--gold);
+    font-size:2rem;
+
+    margin-bottom:25px;
+}
+
+.destaque-principal h3{
+    font-size:1.5rem;
+    margin-bottom:15px;
+}
+
+.destaque-principal p{
+    color:var(--grey);
+    line-height:1.8;
+}
+
+.destaques-grid{
+    display:grid;
+    gap:18px;
+}
+
+.destaque-item{
+    display:flex;
+    align-items:flex-start;
+    gap:18px;
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+    border-radius:22px;
+
+    padding:25px;
+
+    transition:.3s;
+}
+
+.destaque-item:hover{
+    transform:translateY(-4px);
+    border-color:rgba(199,170,124,.4);
+}
+
+.destaque-item span{
+    font-size:30px;
+    color:var(--gold);
+}
+
+.destaque-item h3{
+    margin-bottom:8px;
+    color:var(--white);
+}
+
+.destaque-item p{
+    color:var(--grey);
+    line-height:1.6;
+}
+
+/**************
+TABLET
+**************/
+
+@media(max-width:992px){
+
+.sobre{
+    padding:90px 0;
+}
+
+.sobre-container{
+    grid-template-columns:1fr;
+    gap:50px;
+}
+
+.sobre h2{
+    font-size:2.4rem;
+}
+
+}
+
+/**************
+MOBILE
+**************/
+
+@media(max-width:768px){
+
+.sobre-container{
+    width:calc(100% - 28px);
+}
+
+.sobre h2{
+    font-size:2rem;
+}
+
+.sobre-introducao{
+    font-size:1.05rem;
+}
+
+.sobre-descricao p{
+    font-size:.96rem;
+}
+
+.destaque-principal{
+    padding:30px;
+}
+
+.destaque-item{
+    padding:22px;
+}
+
+.sobre-botao{
+    width:100%;
+    padding:18px;
+}
+
+}
+
+/**************
+TELEMÓVEIS PEQUENOS
+**************/
+
+@media(max-width:480px){
+
+.sobre{
+    padding:70px 0;
+}
+
+.sobre h2{
+    font-size:1.75rem;
+}
+
+.destaque-principal{
+    border-radius:22px;
+}
+
+.destaque-item{
+    border-radius:18px;
+}
+
+.destaque-item span{
+    font-size:24px;
+}
+
 }

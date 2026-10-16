@@ -1,0 +1,414 @@
+/* ===========================
+   TOKENS
+   Nota: sem @import de fontes externas — o build faz prerender
+   num browser headless sem acesso à internet, e um @import remoto
+   fica pendurado à espera de rede, o que rebenta o build (timeout).
+   Se quiseres Playfair/Poppins "a sério", ver instruções no fim do
+   ficheiro para hospedar as fontes localmente em /public/fonts.
+=========================== */
+
+.servicos {
+  --gold: #d4af37;
+  --gold-light: #f2d88f;
+  --bg: #0f0f0f;
+  --card-bg: #161616;
+  --card-bg-alt: #1c1c1c;
+  --text-muted: #a8a8a8;
+  --border-soft: rgba(255, 255, 255, 0.07);
+  --font-display: Georgia, "Times New Roman", "Noto Serif", serif;
+  --font-body: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+
+  padding: 110px 0;
+  background: var(--bg);
+  color: #fff;
+  font-family: var(--font-body);
+}
+
+.servicos .container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 20px;
+}
+
+/* ===========================
+   HEADER
+=========================== */
+
+.servicos-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.servicos-header span {
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.servicos-header h2 {
+  margin-top: 16px;
+  font-family: var(--font-display);
+  font-size: 2.9rem;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+.servicos-header p {
+  margin-top: 18px;
+  color: var(--text-muted);
+  max-width: 620px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1.02rem;
+  line-height: 1.7;
+}
+
+/* ===========================
+   GRID
+=========================== */
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+@media (max-width: 991px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ===========================
+   CARD
+=========================== */
+
+.service-card {
+  position: relative;
+  background: linear-gradient(160deg, var(--card-bg), var(--card-bg-alt));
+  border: 1px solid var(--border-soft);
+  border-radius: 22px;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 30px 55px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(212, 175, 55, 0.25);
+  border-color: rgba(212, 175, 55, 0.35);
+}
+
+/* --- media --- */
+
+.service-media {
+  position: relative;
+  height: 260px;
+  overflow: hidden;
+}
+
+.service-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.service-card:hover .service-media img {
+  transform: scale(1.09);
+}
+
+.service-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 55%, rgba(15, 15, 15, 0.85) 100%);
+  pointer-events: none;
+}
+
+.service-img-fallback {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 25% 20%, rgba(212, 175, 55, 0.14), transparent 60%),
+    linear-gradient(160deg, #1a1a1a, #101010);
+}
+
+.fallback-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.35);
+  font-weight: 600;
+}
+
+/* --- content --- */
+
+.service-content {
+  padding: 26px 26px 28px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.service-content h3 {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  margin-bottom: 12px;
+  color: #fff;
+}
+
+.service-content p {
+  color: var(--text-muted);
+  flex: 1;
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+/* ===========================
+   BUTTON
+=========================== */
+
+.service-btn {
+  margin-top: 22px;
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 1.5px solid var(--gold);
+  background: transparent;
+  color: var(--gold);
+  padding: 11px 24px;
+  border-radius: 40px;
+  font-weight: 600;
+  font-size: 0.92rem;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
+
+.btn-arrow {
+  transition: transform 0.3s ease;
+}
+
+.service-btn:hover {
+  background: var(--gold);
+  color: #0f0f0f;
+}
+
+.service-btn:hover .btn-arrow {
+  transform: translateX(4px);
+}
+
+/* ===========================
+   MODAL
+=========================== */
+
+.service-modal .modal-content {
+  background: var(--card-bg, #1b1b1b);
+  color: white;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.service-modal .modal-header,
+.service-modal .modal-footer {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.service-modal .modal-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+}
+
+.service-modal .btn-close {
+  filter: invert(1);
+}
+
+.modal-media {
+  width: 100%;
+  height: 340px;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 26px;
+}
+
+.modal-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.modal-description {
+  color: #d3d3d3;
+  line-height: 1.8;
+}
+
+.modal-services {
+  margin-top: 26px;
+}
+
+.modal-services h4 {
+  color: var(--gold, #d4af37);
+  margin-bottom: 16px;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+}
+
+.modal-services ul {
+  padding-left: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px 16px;
+}
+
+.modal-services li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #ddd;
+  font-size: 0.95rem;
+}
+
+.check-icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(212, 175, 55, 0.15);
+  color: var(--gold, #d4af37);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.service-book-btn {
+  background: var(--gold, #d4af37);
+  border: none;
+  color: #000;
+  font-weight: bold;
+  padding: 11px 26px;
+  border-radius: 40px;
+  transition: background 0.3s, color 0.3s;
+}
+
+.service-book-btn:hover {
+  background: white;
+  color: black;
+}
+
+/* ===========================
+   SWIPER (MOBILE)
+=========================== */
+
+.swiper {
+  padding-bottom: 50px;
+  overflow: visible;
+}
+
+.swiper-slide {
+  height: auto;
+}
+
+.swiper-pagination-bullet {
+  background: rgba(255, 255, 255, 0.3) !important;
+  opacity: 1 !important;
+  width: 8px;
+  height: 8px;
+  transition: all 0.3s ease;
+}
+
+.swiper-pagination-bullet-active {
+  background: var(--gold, #d4af37) !important;
+  width: 22px;
+  border-radius: 4px;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: var(--gold, #d4af37) !important;
+  background: rgba(15, 15, 15, 0.7);
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50%;
+  backdrop-filter: blur(4px);
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 16px !important;
+  font-weight: 700;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+.mobile-services {
+  display: none;
+}
+
+.desktop-services {
+  display: block;
+}
+
+@media (max-width: 991px) {
+  .desktop-services {
+    display: none;
+  }
+
+  .mobile-services {
+    display: block;
+  }
+
+  .servicos {
+    padding: 75px 0;
+  }
+
+  .servicos-header h2 {
+    font-size: 2.1rem;
+  }
+
+  .service-card {
+    max-width: 380px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 576px) {
+  .service-media {
+    height: 230px;
+  }
+
+  .service-content {
+    padding: 16px 22px 24px;
+  }
+
+  .servicos-header h2 {
+    font-size: 1.8rem;
+  }
+
+  .modal-media {
+    height: 220px;
+  }
+
+  .modal-services ul {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 400px) {
+  .modal-services ul {
+    grid-template-columns: 1fr;
+  }
+}

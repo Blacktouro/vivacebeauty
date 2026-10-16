@@ -1,12 +1,10 @@
-.team-section {
-  padding: 100px 8%;
-  background: #f5e6d3;
-}
+/* ===========================
+   THAMY — cores da secção
+   (o resto do estilo vem de team-shared.css)
+=========================== */
 
-.reverse {
-  flex-direction: row-reverse;
-}
-
-.team-text h3 {
-  color: #6fbf73;
+.team-section.thamy {
+  --accent: #d4af37;
+  --accent-soft: rgba(212, 175, 55, 0.15);
+  --bg: #0f0f0f;
 }

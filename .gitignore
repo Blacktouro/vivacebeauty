@@ -1,0 +1,11 @@
+node_modules
+dist
+.env
+bin
+obj
+*.bak
+*.log
+webhook_env/
+.venv/
+venv/
+__pycache__/

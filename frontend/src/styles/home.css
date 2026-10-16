@@ -1,0 +1,308 @@
+.section-container {
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.section-label {
+  display: inline-block;
+  margin-bottom: 16px;
+  color: #55a963;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.section-heading {
+  max-width: 700px;
+  margin-bottom: 50px;
+}
+
+.section-heading h2,
+.about-section h2,
+.contact-section h2 {
+  margin-bottom: 20px;
+  font-size: clamp(36px, 5vw, 58px);
+  line-height: 1.1;
+  letter-spacing: -2px;
+}
+
+.section-heading p,
+.about-section p,
+.contact-section p {
+  color: #656b65;
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+.centered-heading {
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+}
+
+/* Sobre nós */
+
+.about-section {
+  padding: 110px 0;
+  background: #fffaf4;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.about-card {
+  padding: 45px;
+  background: #f7ead8;
+  border-radius: 30px;
+}
+
+.about-icon {
+  display: block;
+  margin-bottom: 20px;
+  color: #55a963;
+  font-size: 40px;
+}
+
+.about-card h3 {
+  margin-bottom: 15px;
+  font-size: 26px;
+}
+
+/* Serviços */
+
+.services-section {
+  padding: 110px 0;
+  background: #ffffff;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.service-card {
+  padding: 35px;
+  background: #fffaf4;
+  border: 1px solid #eee5d9;
+  border-radius: 25px;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 20px 45px rgba(26, 36, 27, 0.1);
+}
+
+.service-icon {
+  width: 58px;
+  height: 58px;
+  margin-bottom: 24px;
+  display: grid;
+  place-items: center;
+  background: #65bd72;
+  border-radius: 18px;
+  font-size: 26px;
+}
+
+.service-card h3 {
+  margin-bottom: 12px;
+  font-size: 23px;
+}
+
+.service-card p {
+  color: #656b65;
+  line-height: 1.65;
+}
+
+/* Preçário */
+
+.prices-section {
+  padding: 110px 0;
+  background: #f7ead8;
+}
+
+.prices-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+.price-card {
+  padding: 35px;
+  background: #ffffff;
+  border-radius: 25px;
+  box-shadow: 0 15px 40px rgba(31, 37, 31, 0.06);
+}
+
+.price-card h3 {
+  padding-bottom: 20px;
+  margin-bottom: 10px;
+  color: #429c51;
+  border-bottom: 1px solid #ebe2d7;
+  font-size: 25px;
+}
+
+.price-item {
+  padding: 16px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  border-bottom: 1px solid #f1ebe3;
+}
+
+.price-item:last-child {
+  border-bottom: 0;
+}
+
+.price-item span {
+  color: #555b54;
+}
+
+.price-item strong {
+  flex-shrink: 0;
+  color: #20251f;
+  font-size: 15px;
+}
+
+/* Galeria */
+
+.gallery-section {
+  padding: 110px 0;
+  background: #ffffff;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.gallery-grid img {
+  width: 100%;
+  height: 330px;
+  display: block;
+  object-fit: cover;
+  border-radius: 22px;
+  transition:
+    transform 0.25s ease,
+    filter 0.25s ease;
+}
+
+.gallery-grid img:hover {
+  transform: scale(1.02);
+  filter: brightness(0.9);
+}
+
+/* Contacto */
+
+.contact-section {
+  margin: 25px;
+  padding: 100px 0;
+  color: #ffffff;
+  background: #20251f;
+  border-radius: 35px;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.contact-content p {
+  margin-bottom: 30px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.contact-information {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.contact-item {
+  padding: 25px;
+  display: flex;
+  gap: 15px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+}
+
+.contact-item > span {
+  font-size: 25px;
+}
+
+.contact-item h3 {
+  margin-bottom: 7px;
+  font-size: 18px;
+}
+
+.contact-item p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.67);
+  font-size: 14px;
+}
+
+/* Responsivo */
+
+@media (max-width: 900px) {
+  .about-grid,
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 45px;
+  }
+
+  .services-grid,
+  .prices-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 580px) {
+  .section-container {
+    width: calc(100% - 30px);
+  }
+
+  .about-section,
+  .services-section,
+  .prices-section,
+  .gallery-section {
+    padding: 75px 0;
+  }
+
+  .services-grid,
+  .prices-grid,
+  .gallery-grid,
+  .contact-information {
+    grid-template-columns: 1fr;
+  }
+
+  .price-card {
+    padding: 28px 22px;
+  }
+
+  .gallery-grid img {
+    height: 300px;
+  }
+
+  .contact-section {
+    margin: 12px;
+    padding: 70px 0;
+    border-radius: 25px;
+  }
+}

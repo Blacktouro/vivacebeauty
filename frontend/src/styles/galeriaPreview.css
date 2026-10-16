@@ -1,0 +1,140 @@
+/* ===========================
+   GALERIA — PRÉVIA (secção página principal)
+=========================== */
+
+.galeria-preview-section {
+  --accent: #e2836a;
+  --accent-soft: rgba(226, 131, 106, 0.25);
+
+  padding: 110px 0;
+  background: #0f0f0f;
+  color: #ffffff;
+}
+
+.galeria-preview-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ===========================
+   CABEÇALHO
+=========================== */
+
+.galeria-preview-header {
+  text-align: center;
+  margin-bottom: 44px;
+}
+
+.galeria-preview-header .section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.galeria-preview-header .section-label::before {
+  content: "";
+  width: 24px;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+.galeria-preview-header h2 {
+  margin: 16px 0 14px;
+  font-size: clamp(32px, 4.5vw, 48px);
+  letter-spacing: -1.5px;
+  line-height: 1.1;
+}
+
+.galeria-preview-header p {
+  max-width: 52ch;
+  margin: 0 auto;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+/* ===========================
+   GRELHA
+=========================== */
+
+.galeria-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 44px;
+}
+
+.galeria-preview-item {
+  aspect-ratio: 1 / 1;
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.galeria-preview-item img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.galeria-preview-item:hover img {
+  transform: scale(1.05);
+}
+
+/* ===========================
+   CTA
+=========================== */
+
+.galeria-preview-cta {
+  text-align: center;
+}
+
+.galeria-preview-cta a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 30px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: border-color 0.3s, background 0.3s;
+}
+
+.galeria-preview-cta a:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+/* ===========================
+   RESPONSIVO
+=========================== */
+
+@media (max-width: 900px) {
+  .galeria-preview-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+}
+
+@media (max-width: 580px) {
+  .galeria-preview-section {
+    padding: 75px 0;
+  }
+
+  .galeria-preview-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
