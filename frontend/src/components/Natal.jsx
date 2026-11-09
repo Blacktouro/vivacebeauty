@@ -301,8 +301,9 @@ export function NatalBanner({ language = "pt" }) {
 /* =========================================================
    MÚSICA DE NATAL — "Jingle Bells" (melodia de 1857, domínio público)
    tocada com o Web Audio API: nenhum ficheiro de áudio, nenhuns direitos.
-   Só toca quando a pessoa carrega no botão (os browsers não deixam
-   tocar som sozinho, e seria incómodo).
+   Toca sempre: arranca logo se o browser deixar, senão no primeiro
+   toque/clique na página (os browsers exigem um gesto). Se a pessoa
+   carregar em "Parar música", fica desligada nas visitas seguintes.
    ========================================================= */
 const N = { C3: 130.81, F3: 174.61, G3: 196.0, C5: 523.25, D5: 587.33, E5: 659.25, F5: 698.46, G5: 783.99 };
 const MELODIA = [
@@ -381,21 +382,36 @@ function useMusicaNatal() {
     timerRef.current = window.setTimeout(() => agendarVolta(fim), (fim - ctx.currentTime - 1.5) * 1000);
   };
 
+  const aTocarRef = useRef(false);
+  const PREF = "vb-musica-natal"; // "off" = a pessoa desligou; fica lembrado
+
+  const criarCtx = () => {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!ctxRef.current) {
+      ctxRef.current = new AC();
+      masterRef.current = ctxRef.current.createGain();
+      masterRef.current.gain.value = 0.5;
+      masterRef.current.connect(ctxRef.current.destination);
+    }
+    return ctxRef.current;
+  };
+
+  const comecar = () => {
+    if (aTocarRef.current) return;
+    const ctx = ctxRef.current;
+    masterRef.current.gain.cancelScheduledValues(ctx.currentTime);
+    masterRef.current.gain.setValueAtTime(0.0001, ctx.currentTime);
+    masterRef.current.gain.exponentialRampToValueAtTime(0.5, ctx.currentTime + 1.2); // entra suave
+    agendarVolta(ctx.currentTime + 0.15);
+    aTocarRef.current = true;
+    setATocar(true);
+  };
+
   const ligar = () => {
     try {
-      const AC = window.AudioContext || window.webkitAudioContext;
-      if (!ctxRef.current) {
-        ctxRef.current = new AC();
-        masterRef.current = ctxRef.current.createGain();
-        masterRef.current.gain.value = 0.55;
-        masterRef.current.connect(ctxRef.current.destination);
-      }
-      const ctx = ctxRef.current;
-      ctx.resume();
-      masterRef.current.gain.cancelScheduledValues(ctx.currentTime);
-      masterRef.current.gain.setValueAtTime(0.55, ctx.currentTime);
-      agendarVolta(ctx.currentTime + 0.1);
-      setATocar(true);
+      const ctx = criarCtx();
+      ctx.resume().then(() => { if (ctx.state === "running") comecar(); });
+      try { localStorage.removeItem(PREF); } catch { /* ignora */ }
     } catch {
       /* sem áudio */
     }
@@ -406,16 +422,49 @@ function useMusicaNatal() {
     if (ctx) {
       // corta suavemente e fecha (pára as notas já agendadas)
       masterRef.current.gain.setTargetAtTime(0.0001, ctx.currentTime, 0.08);
-      window.setTimeout(() => { ctx.close(); ctxRef.current = null; }, 400);
+      ctxRef.current = null;
+      window.setTimeout(() => ctx.close(), 400);
     }
+    aTocarRef.current = false;
     setATocar(false);
+    try { localStorage.setItem(PREF, "off"); } catch { /* ignora */ }
   };
 
   useEffect(() => {
-    const parar = () => { if (document.hidden && ctxRef.current) desligar(); };
-    document.addEventListener("visibilitychange", parar);
-    return () => { document.removeEventListener("visibilitychange", parar); window.clearTimeout(timerRef.current); if (ctxRef.current) ctxRef.current.close(); };
+    // Música sempre a tocar: tenta arrancar logo; se o browser não deixar
+    // (precisa de um gesto da pessoa), arranca no primeiro toque/clique/tecla
+    // em qualquer sítio da página. Se a pessoa a desligou, respeita.
+    let desligadoPeloUtilizador = false;
+    try { desligadoPeloUtilizador = localStorage.getItem(PREF) === "off"; } catch { /* ignora */ }
+    if (desligadoPeloUtilizador) return undefined;
+
+    const eventos = ["pointerdown", "keydown", "touchend"];
+    const tirar = () => eventos.forEach((ev) => window.removeEventListener(ev, noGesto, true));
+    function noGesto(e) {
+      if (e.target?.closest?.(".natal-musica")) { tirar(); return; } // o botão trata disso
+      tirar();
+      ligar();
+    }
+    try {
+      const ctx = criarCtx();
+      ctx.resume().then(() => {
+        if (ctx.state === "running") { tirar(); comecar(); }
+      }).catch(() => {});
+    } catch { /* sem áudio */ }
+    eventos.forEach((ev) => window.addEventListener(ev, noGesto, { capture: true, passive: true }));
+    return tirar;
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    // pausa quando o separador fica escondido e continua quando volta
+    const vis = () => {
+      const ctx = ctxRef.current;
+      if (!ctx || !aTocarRef.current) return;
+      if (document.hidden) ctx.suspend(); else ctx.resume();
+    };
+    document.addEventListener("visibilitychange", vis);
+    return () => { document.removeEventListener("visibilitychange", vis); window.clearTimeout(timerRef.current); if (ctxRef.current) ctxRef.current.close(); };
   }, []);
 
   return [aTocar, aTocar ? desligar : ligar];
