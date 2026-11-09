@@ -9,6 +9,7 @@ import Helen from "./components/Helen";
 import Thamy from "./components/Thamy";
 import Wilza from "./components/Wilza";
 import Novidades from "./components/Novidades";
+import Natal from "./components/Natal";
 import AgendamentoWhatsApp from "./components/AgendamentoWhatsApp";
 
 import GaleriaFaixas from "./components/GaleriaFaixas";
@@ -217,6 +218,8 @@ function App() {
       >
         {seo.skipText}
       </a>
+
+      <Natal language={language} />
 
       <Header
         language={language}
