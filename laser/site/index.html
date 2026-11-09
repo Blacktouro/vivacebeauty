@@ -322,6 +322,45 @@
     .map-ph{ width:100%; height:100%; display:grid; place-items:center; align-content:center; gap:14px; text-align:center; padding:24px; background:radial-gradient(circle at 50% 40%, #2A231C 0%, var(--surface) 70%); color:var(--ink-soft); }
     .map-ph svg{ width:36px; height:36px; color:var(--gold); }
 
+    /* Pop-up "Saber o preço" */
+    .pp{ border:0; padding:0; margin:auto; width:min(520px, calc(100% - 32px)); max-height:calc(100dvh - 32px); background:var(--surface); color:var(--ink); border-radius:var(--r-md); box-shadow:0 30px 80px -20px rgba(0,0,0,.9); border:1px solid var(--line); overflow:auto; }
+    .pp::backdrop{ background:rgba(10,9,8,.72); backdrop-filter:blur(3px); }
+    .pp[open]{ animation:ppIn .35s cubic-bezier(.2,.7,.2,1); }
+    .pp[open]::backdrop{ animation:fade .3s ease; }
+    @keyframes ppIn{ from{ opacity:0; transform:translateY(16px) scale(.98); } to{ opacity:1; transform:none; } }
+    @keyframes fade{ from{ opacity:0; } }
+    @media (max-width:599px){
+      .pp{ width:100%; max-width:none; margin:auto 0 0; border-radius:var(--r-md) var(--r-md) 0 0; max-height:88dvh; padding-bottom:env(safe-area-inset-bottom); }
+      @keyframes ppIn{ from{ transform:translateY(100%); } to{ transform:none; } }
+    }
+    .pp-in{ padding:28px 24px 24px; }
+    @media (min-width:600px){ .pp-in{ padding:36px 36px 32px; } }
+    .pp-x{ position:absolute; top:12px; right:12px; width:44px; height:44px; border-radius:50%; display:grid; place-items:center; color:var(--ink-soft); background:transparent; border:0; cursor:pointer; }
+    .pp-x:hover{ background:rgba(245,239,233,.07); color:var(--ink); }
+    .pp-x svg{ width:20px; height:20px; }
+    .pp h2{ font-size:clamp(26px, 6vw, 32px); margin:4px 0 8px; padding-right:36px; }
+    .pp .eyebrow{ margin-bottom:12px; }
+    .pp-sub{ color:var(--ink-soft); margin-bottom:22px; font-size:16px; }
+    .pp-oferta{ display:none; margin:-8px 0 20px; padding:12px 14px; border-radius:var(--r-sm); background:rgba(233,199,154,.1); border:1px solid rgba(233,199,154,.35); color:var(--gold); font-weight:700; font-size:15px; }
+    .pp-oferta.on{ display:block; }
+    .pp-q{ font-size:14px; font-weight:700; margin:0 0 10px; color:var(--ink); }
+    .pp-step{ border:0; margin:0 0 20px; }
+    .chips{ display:flex; flex-wrap:wrap; gap:8px; }
+    .chip input{ position:absolute; opacity:0; pointer-events:none; }
+    .chip span{ display:inline-flex; align-items:center; min-height:44px; padding:10px 16px; border-radius:var(--r-pill); border:1px solid var(--line); background:var(--bg); color:var(--ink); font-size:15px; font-weight:500; cursor:pointer; transition:border-color .15s ease, background-color .15s ease, color .15s ease, transform .1s ease; user-select:none; }
+    .chip span:hover{ border-color:var(--ink-soft); }
+    .chip input:checked + span{ background:var(--gold); color:var(--gold-ink); border-color:var(--gold); font-weight:700; }
+    .chip input:focus-visible + span{ outline:2px solid var(--gold); outline-offset:3px; }
+    .chip span:active{ transform:scale(.97); }
+    .pp-zonas[hidden]{ display:none; }
+    .pp-field{ display:block; width:100%; min-height:48px; padding:12px 16px; border-radius:var(--r-sm); border:1px solid var(--line); background:var(--bg); color:var(--ink); font-size:16px; }
+    .pp-field:focus{ outline:2px solid var(--gold); outline-offset:2px; border-color:transparent; }
+    .pp-go{ width:100%; margin-top:6px; }
+    .pp-go[aria-disabled="true"]{ opacity:.5; pointer-events:none; }
+    .pp-foot{ margin-top:12px; font-size:13px; color:var(--ink-soft); text-align:center; }
+    .pp-foot a{ color:var(--ink); }
+    @media (prefers-reduced-motion:reduce){ .pp[open], .pp[open]::backdrop{ animation:none; } }
+
     /* Barra fixa no telemóvel */
     .mbar{ position:fixed; left:0; right:0; bottom:0; z-index:60; display:flex; gap:10px; padding:12px 16px calc(12px + env(safe-area-inset-bottom)); background:rgba(19,17,16,.96); border-top:1px solid var(--line); backdrop-filter:blur(8px); transition:transform .3s cubic-bezier(.2,.7,.2,1); }
     .js .mbar{ transform:translateY(110%); }
@@ -651,6 +690,49 @@
     </div>
   </footer>
 
+  <!-- POP-UP: saber o preço em 1 minuto -->
+  <dialog class="pp" id="pp" aria-labelledby="pp-t">
+    <form method="dialog" class="pp-in" id="pp-form" novalidate>
+      <button class="pp-x" value="fechar" aria-label="Fechar" data-umami-event="popup-fechar"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+      <p class="eyebrow">Resposta rápida</p>
+      <h2 id="pp-t">Saiba o preço <span class="gold">para si</span></h2>
+      <p class="pp-sub">Escolha o que quer tratar e enviamos-lhe o valor e a próxima vaga pelo WhatsApp. Sem compromisso.</p>
+      <p class="pp-oferta" id="pp-oferta"></p>
+
+      <fieldset class="pp-step">
+        <legend class="pp-q">O que quer tratar?</legend>
+        <div class="chips" role="radiogroup">
+          <label class="chip"><input type="radio" name="serv" value="depilacao"><span>Depilação a laser</span></label>
+          <label class="chip"><input type="radio" name="serv" value="fungos"><span>Fungos nas unhas</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset class="pp-step pp-zonas" id="pp-zonas" hidden>
+        <legend class="pp-q">Que zonas? <span class="soft" style="font-weight:400">(pode escolher várias)</span></legend>
+        <div class="chips">
+          <label class="chip"><input type="checkbox" name="zona" value="Buço"><span>Buço</span></label>
+          <label class="chip"><input type="checkbox" name="zona" value="Rosto"><span>Rosto</span></label>
+          <label class="chip"><input type="checkbox" name="zona" value="Axilas"><span>Axilas</span></label>
+          <label class="chip"><input type="checkbox" name="zona" value="Virilha / biquíni"><span>Biquíni</span></label>
+          <label class="chip"><input type="checkbox" name="zona" value="Pernas"><span>Pernas</span></label>
+          <label class="chip"><input type="checkbox" name="zona" value="Braços"><span>Braços</span></label>
+          <label class="chip"><input type="checkbox" name="zona" value="Corpo inteiro"><span>Corpo inteiro</span></label>
+        </div>
+      </fieldset>
+
+      <div class="pp-step">
+        <label class="pp-q" for="pp-nome" style="display:block">O seu nome <span class="soft" style="font-weight:400">(opcional)</span></label>
+        <input class="pp-field" id="pp-nome" name="nome" type="text" autocomplete="given-name" maxlength="40" placeholder="Ex.: Ana">
+      </div>
+
+      <a class="btn btn-primary pp-go" id="pp-go" href="#" target="_blank" rel="noopener" aria-disabled="true" data-umami-event="popup-whatsapp">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 5h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H9l-5 4V6a1 1 0 0 1 1-1z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+        Receber preço no WhatsApp
+      </a>
+      <p class="pp-foot">Prefere falar? <a href="tel:+351919828555" data-umami-event="popup-ligar">Ligue 919 828 555</a></p>
+    </form>
+  </dialog>
+
   <div class="mbar" role="region" aria-label="Marcação rápida">
     <a class="btn btn-primary" data-mbar-wa href="https://wa.me/351919828555?text=Ol%C3%A1!%20Gostaria%20de%20marcar%20uma%20avalia%C3%A7%C3%A3o%20para%20depila%C3%A7%C3%A3o%20a%20laser." target="_blank" rel="noopener" data-umami-event="laser-whatsapp" data-umami-event-local="barra">
       <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 5h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H9l-5 4V6a1 1 0 0 1 1-1z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
@@ -704,6 +786,54 @@
         el.style.transitionDelay=Math.min(irmaos,4)*70+'ms';
         el.classList.add('rv'); io.observe(el);
       });
+    }
+
+    // ---------- POP-UP "Saiba o preço" ----------
+    // OFERTA: se a Vivace tiver uma oferta real, escreve-a aqui (ex.: "Oferta da 1.ª avaliação até 31 de março").
+    // Fica vazio = não aparece nada.
+    var OFERTA = '';
+    var pp=d.getElementById('pp');
+    if(pp && typeof pp.showModal==='function'){
+      var KEY='vb-popup-visto', DIAS=7, mostrado=false, inicio=Date.now();
+      function jaVisto(){ try{ var t=+localStorage.getItem(KEY); return t && (Date.now()-t) < DIAS*864e5; }catch(e){ return false; } }
+      function marcar(){ try{ localStorage.setItem(KEY, Date.now()); }catch(e){} }
+      var cliclouCTA=false;
+      d.addEventListener('click', function(e){ var a=e.target.closest('a[href^="https://wa.me"], a[href^="tel:"]'); if(a && !pp.contains(a)) cliclouCTA=true; });
+      function abrir(origem){
+        if(mostrado || cliclouCTA || jaVisto() || d.querySelector('dialog[open]')) return;
+        if(Date.now()-inicio < 12000) return;          // nunca nos primeiros 12 s
+        mostrado=true; marcar();
+        if(OFERTA){ var o=d.getElementById('pp-oferta'); o.textContent=OFERTA; o.classList.add('on'); }
+        pp.showModal();
+        if(window.umami) umami.track('popup-mostrar', {origem:origem});
+      }
+      // Gatilhos: 35 s na página, ou 60% de scroll, ou intenção de sair (computador)
+      setTimeout(function(){ abrir('tempo'); }, 35000);
+      window.addEventListener('scroll', function(){
+        var h=d.documentElement; if((h.scrollTop+innerHeight)/h.scrollHeight > .6) abrir('scroll');
+      }, {passive:true});
+      d.addEventListener('mouseout', function(e){ if(!e.relatedTarget && e.clientY<=0) abrir('sair'); });
+      // fechar ao clicar fora
+      pp.addEventListener('click', function(e){ if(e.target===pp) pp.close(); });
+
+      // Formulário → mensagem de WhatsApp
+      var form=d.getElementById('pp-form'), go=d.getElementById('pp-go'), zonas=d.getElementById('pp-zonas');
+      function atualizar(){
+        var serv=(form.querySelector('input[name="serv"]:checked')||{}).value;
+        zonas.hidden = serv!=='depilacao';
+        var nome=form.nome.value.trim();
+        var z=[].map.call(form.querySelectorAll('input[name="zona"]:checked'), function(i){ return i.value; });
+        var msg='Olá!'+(nome?' Chamo-me '+nome+'.':'');
+        if(serv==='depilacao') msg+=' Gostava de saber o preço da depilação a laser'+(z.length?' para: '+z.join(', '):'')+' e quando há vaga para a avaliação.';
+        else if(serv==='fungos') msg+=' Gostava de saber o preço do tratamento a laser para fungos nas unhas dos pés e quando há vaga para a avaliação.';
+        go.href = serv ? WA+encodeURIComponent(msg) : '#';
+        go.setAttribute('aria-disabled', serv?'false':'true');
+        if(serv) go.setAttribute('data-umami-event-servico', serv);
+      }
+      form.addEventListener('change', atualizar); form.addEventListener('input', atualizar);
+      form.addEventListener('submit', function(e){ if(!e.submitter || !e.submitter.classList.contains('pp-x')) e.preventDefault(); });
+      go.addEventListener('click', function(){ setTimeout(function(){ pp.close(); }, 300); });
+      atualizar();
     }
 
     // Mapa só carrega quando pedem
