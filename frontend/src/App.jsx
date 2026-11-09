@@ -9,7 +9,7 @@ import Helen from "./components/Helen";
 import Thamy from "./components/Thamy";
 import Wilza from "./components/Wilza";
 import Novidades from "./components/Novidades";
-import Natal from "./components/Natal";
+import Natal, { natalAtivo } from "./components/Natal";
 import AgendamentoWhatsApp from "./components/AgendamentoWhatsApp";
 
 import GaleriaFaixas from "./components/GaleriaFaixas";
@@ -23,6 +23,26 @@ import "./styles/responsive.css";
 const SITE_URL = "https://vivace-beauty.pt/";
 const SHARE_IMAGE =
   "https://vivace-beauty.pt/images/og-vivace.jpg";
+
+// Versão de Natal do título e descrição (Google, partilhas) — 1 dez a 6 jan
+const seoNatal = {
+  pt: {
+    title: "Natal na Vivace Beauty | Cabeleireiro e Estética em Peniche",
+    description:
+      "Prepare o seu look de Natal e Passagem de Ano na Vivace Beauty, em Peniche: cabelo, unhas de gel, pestanas, sobrancelhas e estética. Marque já pelo WhatsApp.",
+    ogTitle: "Natal na Vivace Beauty | Beleza para as festas em Peniche",
+    ogDescription:
+      "Cabelo, unhas, pestanas e estética para o Natal e a Passagem de Ano, em Peniche. Marque já.",
+  },
+  en: {
+    title: "Christmas at Vivace Beauty | Hair and Beauty Salon in Peniche",
+    description:
+      "Get your look ready for Christmas and New Year's Eve at Vivace Beauty in Peniche: hair, gel nails, lashes, brows and beauty treatments. Book now on WhatsApp.",
+    ogTitle: "Christmas at Vivace Beauty | Holiday beauty in Peniche",
+    ogDescription:
+      "Hair, nails, lashes and beauty treatments for Christmas and New Year's Eve in Peniche. Book now.",
+  },
+};
 
 const seoContent = {
   pt: {
@@ -84,7 +104,9 @@ function App() {
     return savedLanguage === "en" ? "en" : "pt";
   });
 
-  const seo = seoContent[language] ?? seoContent.pt;
+  const natal = natalAtivo();
+  const seoBase = seoContent[language] ?? seoContent.pt;
+  const seo = natal ? { ...seoBase, ...(seoNatal[language] ?? seoNatal.pt) } : seoBase;
 
   useEffect(() => {
     localStorage.setItem("vivace-language", language);
@@ -116,11 +138,13 @@ function App() {
           content="index, follow"
         />
 
-        {/* Cor preta do novo cabeçalho */}
+        {/* Cor da barra do browser no telemóvel (vermelho no Natal) */}
         <meta
           name="theme-color"
-          content="#0d0d0e"
+          content={natal ? "#9e0b23" : "#0d0d0e"}
         />
+
+        <link rel="icon" type="image/svg+xml" href={natal ? "/favicon-natal.svg" : "/favicon.svg"} />
 
         <link
           rel="canonical"
