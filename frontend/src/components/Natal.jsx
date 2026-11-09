@@ -298,6 +298,273 @@ export function NatalBanner({ language = "pt" }) {
   );
 }
 
+/* =========================================================
+   MÚSICA DE NATAL — "Jingle Bells" (melodia de 1857, domínio público)
+   tocada com o Web Audio API: nenhum ficheiro de áudio, nenhuns direitos.
+   Só toca quando a pessoa carrega no botão (os browsers não deixam
+   tocar som sozinho, e seria incómodo).
+   ========================================================= */
+const N = { C3: 130.81, F3: 174.61, G3: 196.0, C5: 523.25, D5: 587.33, E5: 659.25, F5: 698.46, G5: 783.99 };
+const MELODIA = [
+  ["E5",1],["E5",1],["E5",2], ["E5",1],["E5",1],["E5",2], ["E5",1],["G5",1],["C5",1.5],["D5",0.5], ["E5",4],
+  ["F5",1],["F5",1],["F5",1.5],["F5",0.5], ["F5",1],["E5",1],["E5",1],["E5",0.5],["E5",0.5], ["E5",1],["D5",1],["D5",1],["E5",1], ["D5",2],["G5",2],
+  ["E5",1],["E5",1],["E5",2], ["E5",1],["E5",1],["E5",2], ["E5",1],["G5",1],["C5",1.5],["D5",0.5], ["E5",4],
+  ["F5",1],["F5",1],["F5",1],["F5",1], ["F5",1],["E5",1],["E5",1],["E5",0.5],["E5",0.5], ["G5",1],["G5",1],["F5",1],["D5",1], ["C5",4],
+];
+const BAIXO = ["C3","C3","C3","C3","F3","C3","G3","C3","C3","C3","C3","C3","F3","C3","G3","C3"]; // 1 por compasso
+const BPM = 150;
+
+function useMusicaNatal() {
+  const ctxRef = useRef(null);
+  const timerRef = useRef(0);
+  const masterRef = useRef(null);
+  const [aTocar, setATocar] = useState(false);
+
+  const sino = (ctx, out, f, t, dur, vol) => {
+    // som de sino: fundamental + harmónicos com decaimento rápido
+    [[1, 1], [2.01, 0.35], [3.98, 0.12]].forEach(([mult, g]) => {
+      const o = ctx.createOscillator();
+      const v = ctx.createGain();
+      o.type = "sine";
+      o.frequency.value = f * mult;
+      v.gain.setValueAtTime(0.0001, t);
+      v.gain.exponentialRampToValueAtTime(vol * g, t + 0.01);
+      v.gain.exponentialRampToValueAtTime(0.0001, t + Math.max(dur, 0.35) * 1.4);
+      o.connect(v).connect(out);
+      o.start(t);
+      o.stop(t + Math.max(dur, 0.35) * 1.5);
+    });
+  };
+  const guizos = (ctx, out, t) => {
+    // pequeno "chocalho" de guizos em cada tempo
+    const len = 0.08;
+    const buf = ctx.createBuffer(1, ctx.sampleRate * len, ctx.sampleRate);
+    const d = buf.getChannelData(0);
+    for (let i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / d.length);
+    const src = ctx.createBufferSource();
+    src.buffer = buf;
+    const hp = ctx.createBiquadFilter();
+    hp.type = "highpass";
+    hp.frequency.value = 7000;
+    const v = ctx.createGain();
+    v.gain.value = 0.05;
+    src.connect(hp).connect(v).connect(out);
+    src.start(t);
+  };
+
+  const agendarVolta = (inicio) => {
+    const ctx = ctxRef.current;
+    const out = masterRef.current;
+    const b = 60 / BPM;
+    let t = inicio;
+    MELODIA.forEach(([n, d]) => {
+      sino(ctx, out, N[n], t, d * b, 0.22);
+      t += d * b;
+    });
+    BAIXO.forEach((n, i) => {
+      [0, 2].forEach((k) => {
+        const tt = inicio + (i * 4 + k) * b;
+        const o = ctx.createOscillator();
+        const v = ctx.createGain();
+        o.type = "triangle";
+        o.frequency.value = N[n];
+        v.gain.setValueAtTime(0.0001, tt);
+        v.gain.exponentialRampToValueAtTime(0.12, tt + 0.02);
+        v.gain.exponentialRampToValueAtTime(0.0001, tt + b * 1.8);
+        o.connect(v).connect(out);
+        o.start(tt);
+        o.stop(tt + b * 2);
+      });
+    });
+    for (let k = 0; k < 64; k++) guizos(ctx, out, inicio + k * b);
+    const fim = inicio + 64 * b + b * 2; // pausa de 2 tempos entre voltas
+    timerRef.current = window.setTimeout(() => agendarVolta(fim), (fim - ctx.currentTime - 1.5) * 1000);
+  };
+
+  const ligar = () => {
+    try {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (!ctxRef.current) {
+        ctxRef.current = new AC();
+        masterRef.current = ctxRef.current.createGain();
+        masterRef.current.gain.value = 0.55;
+        masterRef.current.connect(ctxRef.current.destination);
+      }
+      const ctx = ctxRef.current;
+      ctx.resume();
+      masterRef.current.gain.cancelScheduledValues(ctx.currentTime);
+      masterRef.current.gain.setValueAtTime(0.55, ctx.currentTime);
+      agendarVolta(ctx.currentTime + 0.1);
+      setATocar(true);
+    } catch {
+      /* sem áudio */
+    }
+  };
+  const desligar = () => {
+    window.clearTimeout(timerRef.current);
+    const ctx = ctxRef.current;
+    if (ctx) {
+      // corta suavemente e fecha (pára as notas já agendadas)
+      masterRef.current.gain.setTargetAtTime(0.0001, ctx.currentTime, 0.08);
+      window.setTimeout(() => { ctx.close(); ctxRef.current = null; }, 400);
+    }
+    setATocar(false);
+  };
+
+  useEffect(() => {
+    const parar = () => { if (document.hidden && ctxRef.current) desligar(); };
+    document.addEventListener("visibilitychange", parar);
+    return () => { document.removeEventListener("visibilitychange", parar); window.clearTimeout(timerRef.current); if (ctxRef.current) ctxRef.current.close(); };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return [aTocar, aTocar ? desligar : ligar];
+}
+
+function BotaoMusica({ language }) {
+  const [aTocar, alternar] = useMusicaNatal();
+  const txt = language === "en"
+    ? { on: "Christmas music", off: "Stop music" }
+    : { on: "Música de Natal", off: "Parar música" };
+  return (
+    <button
+      type="button"
+      className={`natal-musica ${aTocar ? "a-tocar" : ""}`}
+      onClick={alternar}
+      aria-pressed={aTocar}
+      data-umami-event={aTocar ? "natal-musica-parar" : "natal-musica-tocar"}
+    >
+      <span className="natal-musica-ico" aria-hidden="true">
+        {aTocar ? (
+          <span className="natal-ondas"><i /><i /><i /><i /></span>
+        ) : (
+          <svg viewBox="0 0 24 24" fill="none"><path d="M9 18V6l11-2v12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /><circle cx="6.5" cy="18" r="2.5" fill="currentColor" /><circle cx="17.5" cy="16" r="2.5" fill="currentColor" /></svg>
+        )}
+      </span>
+      <span className="natal-musica-txt">{aTocar ? txt.off : txt.on}</span>
+    </button>
+  );
+}
+
+/* =========================================================
+   PRESENTES A CAIR — clicar abre uma mensagem de Natal
+   ========================================================= */
+const mensagens = {
+  pt: [
+    { t: "Feliz Natal!", m: "Que esta época te traga calma, carinho e muitos momentos bonitos com quem mais gostas." },
+    { t: "Boas Festas!", m: "Obrigada por fazeres parte da família Vivace este ano. Que 2027 seja ainda mais bonito para ti." },
+    { t: "Um miminho para ti", m: "Lembra-te: cuidar de ti também é um presente. Tira um tempinho só para ti nestas festas." },
+    { t: "Brilha nestas festas!", m: "Que o teu Natal seja cheio de luz, abraços e boas gargalhadas. Feliz Natal da equipa Vivace!" },
+    { t: "Feliz Ano Novo!", m: "Que o novo ano chegue cheio de saúde, alegria e motivos para sorrir. Até já na Vivace!" },
+  ],
+  en: [
+    { t: "Merry Christmas!", m: "May this season bring you calm, warmth and lovely moments with the people you love." },
+    { t: "Season's greetings!", m: "Thank you for being part of the Vivace family this year. May 2027 be even brighter for you." },
+    { t: "A little treat for you", m: "Remember: taking care of yourself is a gift too. Save some time just for you this holiday." },
+    { t: "Shine this season!", m: "May your Christmas be full of light, hugs and laughter. Merry Christmas from the Vivace team!" },
+    { t: "Happy New Year!", m: "May the new year bring you health, joy and plenty of reasons to smile. See you soon at Vivace!" },
+  ],
+};
+const CORES = [["#c8102e", "#d7b984"], ["#2f5d3a", "#c8102e"], ["#d7b984", "#c8102e"], ["#f7f3ee", "#c8102e"]];
+
+function PresentesACair({ language }) {
+  const [lista, setLista] = useState([]);
+  const [aberta, setAberta] = useState(null);
+  const dlg = useRef(null);
+  const idRef = useRef(0);
+  const t = language === "en"
+    ? { abrir: "Open gift", fechar: "Close", cta: "Book Christmas nails", de: "From the whole Vivace Beauty team" }
+    : { abrir: "Abrir presente", fechar: "Fechar", cta: "Marcar unhas de Natal", de: "De toda a equipa Vivace Beauty" };
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
+    const max = window.innerWidth < 600 ? 2 : 3;
+    const novo = () => {
+      setLista((l) => {
+        if (document.hidden || l.length >= max) return l;
+        idRef.current += 1;
+        const [cor, fita] = CORES[idRef.current % CORES.length];
+        return [...l, {
+          id: idRef.current,
+          x: 6 + Math.random() * 82,
+          dur: 11 + Math.random() * 6,
+          rot: Math.random() * 40 - 20,
+          tam: window.innerWidth < 600 ? 50 : 56 + Math.random() * 14,
+          cor, fita,
+        }];
+      });
+    };
+    const primeiro = window.setTimeout(novo, 3500);
+    const iv = window.setInterval(novo, 7000);
+    return () => { window.clearTimeout(primeiro); window.clearInterval(iv); };
+  }, []);
+
+  const tirar = (id) => setLista((l) => l.filter((p) => p.id !== id));
+
+  const abrir = (p) => {
+    tirar(p.id);
+    const lst = mensagens[language] || mensagens.pt;
+    setAberta(lst[Math.floor(Math.random() * lst.length)]);
+    window.umami?.track?.("natal-presente-aberto");
+  };
+
+  useEffect(() => {
+    if (aberta && dlg.current && !dlg.current.open) dlg.current.showModal?.();
+  }, [aberta]);
+
+  const msgWA = language === "en"
+    ? "Hi! I'd like to book my nails for Christmas / New Year's Eve. Which days do you have available?"
+    : "Olá! Gostava de marcar as unhas para o Natal / Passagem de Ano. Que dias têm disponíveis?";
+
+  return (
+    <>
+      <div className="natal-prendas" aria-hidden={lista.length ? undefined : true}>
+        {lista.map((p) => (
+          <button
+            key={p.id}
+            type="button"
+            className="natal-prenda"
+            style={{ left: `${p.x}vw`, width: p.tam, height: p.tam, animationDuration: `${p.dur}s`, "--rot": `${p.rot}deg` }}
+            onAnimationEnd={(e) => { if (e.animationName === "prenda-cair") tirar(p.id); }}
+            onClick={() => abrir(p)}
+            aria-label={t.abrir}
+          >
+            <Presente cor={p.cor} fita={p.fita} />
+          </button>
+        ))}
+      </div>
+
+      {aberta && (
+        <dialog
+          ref={dlg}
+          className="natal-msg"
+          aria-labelledby="natal-msg-t"
+          onClose={() => setAberta(null)}
+          onClick={(e) => { if (e.target === dlg.current) dlg.current.close(); }}
+        >
+          <div className="natal-msg-in">
+            <button type="button" className="natal-msg-x" onClick={() => dlg.current.close()} aria-label={t.fechar}>×</button>
+            <div className="natal-msg-presente" aria-hidden="true"><Presente /></div>
+            <div className="natal-msg-confetis" aria-hidden="true">{Array.from({ length: 14 }, (_, i) => <i key={i} />)}</div>
+            <h2 id="natal-msg-t">{aberta.t}</h2>
+            <p>{aberta.m}</p>
+            <p className="natal-msg-de">— {t.de}</p>
+            <a
+              className="nb-btn nb-btn-1 natal-msg-cta"
+              href={`https://wa.me/${TELEFONE_UNHAS}?text=${encodeURIComponent(msgWA)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-umami-event="natal-presente-marcar"
+            >
+              {t.cta}
+            </a>
+          </div>
+        </dialog>
+      )}
+    </>
+  );
+}
+
 export default function Natal({ language = "pt" }) {
   const [ativo] = useState(() => natalAtivo());
   const [faixa, setFaixa] = useState(() => {
@@ -330,6 +597,8 @@ export default function Natal({ language = "pt" }) {
     <>
       <Neve />
       <PaiNatalVoar />
+      <PresentesACair language={language} />
+      <BotaoMusica language={language} />
       {faixa && (
         <div className="natal-faixa" role="region" aria-label={t.faixa}>
           <div className="natal-faixa-in">
