@@ -54,7 +54,7 @@ const content = {
     service1: "laser podológico",
     and: "e",
     service2: "depilação a laser",
-    intro: `Duas novas tecnologias a laser chegaram à ${NOME_CLINICA}, em ${CIDADE}: tratamento de fungos e calos com laser podológico, e depilação a laser para uma pele mais lisa por mais tempo.`,
+    intro: `Duas novas tecnologias a laser chegaram à ${NOME_CLINICA}, em ${CIDADE}: tratamento de fungos nas unhas com laser podológico, e depilação a laser para uma pele mais lisa por mais tempo.`,
     booking: "Marcações:",
     whatsappBtn: "Marcar pelo WhatsApp",
     callBtn: "Ligar",
@@ -68,7 +68,7 @@ const content = {
         tag: "Novo tratamento",
         titulo: "Laser Podológico",
         resumo:
-          "Tratamento avançado a laser para fungos das unhas (onicomicose), calos e verrugas plantares — sem dor e sem tempo de paragem.",
+          "Tratamento avançado a laser para fungos nas unhas dos pés (onicomicose) — sem dor e sem tempo de paragem.",
         beneficios: [
           "Elimina fungos das unhas de forma eficaz e segura",
           "Sem cortes, sem anestesia, sem recuperação",
@@ -100,7 +100,7 @@ const content = {
     service1: "podiatry laser",
     and: "and",
     service2: "laser hair removal",
-    intro: `Two new laser treatments have arrived at ${NOME_CLINICA} in ${CIDADE}: podiatry laser for nail fungus and calluses, and laser hair removal for smoother skin that lasts longer.`,
+    intro: `Two new laser treatments have arrived at ${NOME_CLINICA} in ${CIDADE}: podiatry laser for toenail fungus, and laser hair removal for smoother skin that lasts longer.`,
     booking: "Bookings:",
     whatsappBtn: "Book on WhatsApp",
     callBtn: "Call",
@@ -114,7 +114,7 @@ const content = {
         tag: "New treatment",
         titulo: "Podiatry Laser",
         resumo:
-          "Advanced laser treatment for nail fungus (onychomycosis), calluses and plantar warts — painless, with no downtime.",
+          "Advanced laser treatment for toenail fungus (onychomycosis) — painless, with no downtime.",
         beneficios: [
           "Treats nail fungus effectively and safely",
           "No cuts, no anaesthesia, no recovery time",

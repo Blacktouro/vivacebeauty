@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Depilação a Laser e Laser Podológico em Peniche | Vivace Beauty</title>
-  <meta name="description" content="Novidade: laser podológico em Peniche, o único na zona, para fungos das unhas, calos e verrugas plantares. E depilação a laser díodo para rosto e corpo. Marque pelo WhatsApp: 919 828 555.">
+  <meta name="description" content="Novidade: laser podológico em Peniche, o único na zona, para fungos nas unhas. E depilação a laser díodo para rosto e corpo. Marque pelo WhatsApp: 919 828 555.">
   <link rel="canonical" href="https://laser.vivace-beauty.pt/">
   <meta name="robots" content="noindex, nofollow">
   <meta name="theme-color" content="#131110">
@@ -72,8 +72,8 @@
         "@type": "Service",
         "@id": "https://laser.vivace-beauty.pt/#laser-podologico",
         "name": "Laser podológico",
-        "serviceType": "Tratamento podológico a laser",
-        "description": "Tratamento a laser para fungos das unhas (onicomicose), calos e verrugas plantares em Peniche, sem cortes nem anestesia.",
+        "serviceType": "Tratamento a laser de fungos nas unhas",
+        "description": "Tratamento a laser para fungos nas unhas dos pés (onicomicose) em Peniche, sem cortes nem anestesia.",
         "provider": { "@id": "https://vivace-beauty.pt/#negocio" },
         "areaServed": { "@type": "City", "name": "Peniche" },
         "image": "https://laser.vivace-beauty.pt/img/laser-podologico.webp",
@@ -210,6 +210,11 @@
     .zone{ display:flex; justify-content:space-between; align-items:baseline; gap:16px; padding:16px 0; border-bottom:1px solid var(--line); }
     .zone b{ font-weight:500; }
     .zone .price{ font-weight:700; white-space:nowrap; }
+    .price-group{ font-family:var(--font-body); font-size:13px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--gold); margin:8px 0 4px; }
+    .prices-full{ margin-bottom:36px; }
+    .prices + .prices-full{ margin-top:0; }
+    .zone-hl b{ font-weight:700; }
+    .zone-hl{ border-bottom-color:var(--gold); }
     .note{ margin-top:20px; font-size:15px; color:var(--ink-soft); }
     .packs{ display:grid; gap:16px; margin-top:40px; }
     @media (min-width:900px){ .packs{ max-width:560px; } }
@@ -240,6 +245,7 @@
     .podo-grid{ display:grid; gap:16px; }
     @media (min-width:900px){ .podo-grid{ grid-template-columns:repeat(3,1fr); gap:20px; } }
     .podo-grid .card h3::before{ content:""; display:block; width:32px; height:3px; border-radius:2px; background:var(--gold); margin-bottom:14px; }
+    .podo-note{ margin-top:20px; color:var(--ink-soft); max-width:62ch; }
     .podo-checks{ margin-top:32px; max-width:760px; }
     .hero-news{ display:flex; align-items:center; gap:10px; margin-top:20px; padding:12px 16px; border:1px solid var(--gold); border-radius:var(--r-sm); color:var(--ink); text-decoration:none; font-size:15px; line-height:1.4; }
     .hero-news .dot{ color:var(--gold); }
@@ -361,7 +367,7 @@
               919 828 555
             </a>
           </div>
-          <a class="hero-news" href="#laser-podologico" data-umami-event="laser-hero-podologico"><span class="dot" aria-hidden="true"></span><span><b>Novidade:</b> laser podológico, único em Peniche e arredores</span><span aria-hidden="true">→</span></a>
+          <a class="hero-news" href="#laser-podologico" data-umami-event="laser-hero-podologico"><span class="dot" aria-hidden="true"></span><span><b>Novidade:</b> laser para fungos nas unhas, único em Peniche e arredores</span><span aria-hidden="true">→</span></a>
           <ul class="trust">
             <li><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7.1L12 17.3 5.8 21l1.6-7.1L2 9.2l7.1-.6z"/></svg>5,0 no Google</li>
             <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="9.5" r="2.5" stroke="currentColor" stroke-width="2"/></svg>R. do Lapadusso 28, Peniche</li>
@@ -379,8 +385,8 @@
         <div class="podo-top">
         <div class="podo-head">
           <p class="badge"><span class="dot" aria-hidden="true"></span>Novidade · Único em Peniche e arredores</p>
-          <h2 id="t-podo" class="podo-title">Laser podológico <span class="gold">em Peniche</span></h2>
-          <p class="lead">Já não precisa de ir para fora para tratar os pés com laser. Tratamento avançado para fungos das unhas, calos e verrugas plantares, sem dor e sem tempo de paragem.</p>
+          <h2 id="t-podo" class="podo-title">Laser para fungos nas unhas <span class="gold">em Peniche</span></h2>
+          <p class="lead">Já não precisa de ir para fora para tratar os pés com laser. Tratamento avançado para fungos nas unhas dos pés, sem dor e sem tempo de paragem.</p>
           <p class="podo-summer"><strong>Prepare as unhas dos pés para o verão</strong> e não perca a oportunidade de melhorar a saúde das suas unhas.</p>
           <div class="btns">
             <a class="btn btn-primary" href="https://wa.me/351919828555?text=Ol%C3%A1!%20Gostaria%20de%20marcar%20uma%20avalia%C3%A7%C3%A3o%20de%20laser%20podol%C3%B3gico." target="_blank" rel="noopener" data-umami-event="laser-whatsapp" data-umami-event-local="podologico">
@@ -392,25 +398,26 @@
         </div>
 
         <figure class="podo-photo">
-          <img src="/img/laser-podologico.webp" srcset="/img/laser-podologico-600.webp 600w, /img/laser-podologico.webp 900w" sizes="(min-width: 900px) 400px, 100vw" width="900" height="1200" loading="lazy" decoding="async" alt="Tratamento de laser podológico às unhas dos pés na Vivace Beauty, em Peniche">
+          <img src="/img/laser-podologico.webp" srcset="/img/laser-podologico-600.webp 600w, /img/laser-podologico.webp 900w" sizes="(min-width: 900px) 400px, 100vw" width="900" height="1200" loading="lazy" decoding="async" alt="Tratamento a laser de fungos nas unhas dos pés na Vivace Beauty, em Peniche">
         </figure>
         </div>
 
-        <h3 class="podo-sub">O que tratamos</h3>
+        <h3 class="podo-sub">Sinais de fungos nas unhas</h3>
         <ul class="podo-grid">
           <li class="card">
-            <h3>Fungos das unhas</h3>
-            <p>Onicomicose: unhas amareladas, grossas ou quebradiças. O laser atua sobre o fungo sem cortes nem anestesia.</p>
+            <h3>Unhas amareladas</h3>
+            <p>A unha perde a cor natural e fica amarela, esbranquiçada ou acastanhada.</p>
           </li>
           <li class="card">
-            <h3>Calos</h3>
-            <p>Tratamento a laser dos calos que incomodam ao andar, sem tempo de paragem.</p>
+            <h3>Unhas grossas</h3>
+            <p>A unha engrossa, fica difícil de cortar e pode incomodar dentro do sapato.</p>
           </li>
           <li class="card">
-            <h3>Verrugas plantares</h3>
-            <p>Verrugas na planta do pé tratadas a laser, sem dor e sem recuperação.</p>
+            <h3>Unhas quebradiças</h3>
+            <p>A unha lasca, esfarela nas pontas ou descola-se da pele.</p>
           </li>
         </ul>
+        <p class="podo-note">Reconhece algum destes sinais? Na avaliação vemos as suas unhas e dizemos-lhe se o laser é indicado.</p>
 
         <ul class="checks podo-checks">
           <li>Trata os fungos das unhas de forma eficaz e segura</li>
@@ -450,16 +457,17 @@
       <div class="wrap">
         <div class="head">
           <p class="eyebrow">Zonas e preços</p>
-          <h2 id="t-precos">Preços de depilação a laser</h2>
+          <h2 id="t-precos">Preços</h2>
           <p class="lead">Preço por sessão. Na avaliação dizemos-lhe o valor total para as zonas que escolher.</p>
         </div>
 
+        <h3 class="price-group">Depilação a laser díodo</h3>
         <div class="prices">
           <ul>
             <li class="zone"><b>Buço</b><span class="price"><span class="ph">[€]</span></span></li>
             <li class="zone"><b>Rosto completo</b><span class="price"><span class="ph">[€]</span></span></li>
             <li class="zone"><b>Axilas</b><span class="price"><span class="ph">[€]</span></span></li>
-            <li class="zone"><b>Virilha</b><span class="price"><span class="ph">[€]</span></span></li>
+            <li class="zone"><b>Virilha / biquíni</b><span class="price"><span class="ph">[€]</span></span></li>
           </ul>
           <ul>
             <li class="zone"><b>Meia perna</b><span class="price"><span class="ph">[€]</span></span></li>
@@ -468,6 +476,14 @@
             <li class="zone"><b>Costas (homem)</b><span class="price"><span class="ph">[€]</span></span></li>
           </ul>
         </div>
+        <ul class="prices-full">
+          <li class="zone zone-hl"><b>Corpo inteiro</b><span class="price"><span class="ph">[€]</span></span></li>
+        </ul>
+
+        <h3 class="price-group">Laser podológico</h3>
+        <ul class="prices-full">
+          <li class="zone zone-hl"><b>Fungos nas unhas dos pés <span class="soft">(por sessão)</span></b><span class="price"><span class="ph">[€]</span></span></li>
+        </ul>
 
         <div class="packs">
           <div class="card">
