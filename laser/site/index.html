@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Depilação a Laser e Laser Podológico em Peniche | Vivace Beauty</title>
-  <meta name="description" content="Depilação a laser díodo em Peniche para rosto e corpo, e laser podológico para fungos das unhas, calos e verrugas plantares. Marque pelo WhatsApp: 919 828 555.">
+  <meta name="description" content="Novidade: laser podológico em Peniche, o único na zona, para fungos das unhas, calos e verrugas plantares. E depilação a laser díodo para rosto e corpo. Marque pelo WhatsApp: 919 828 555.">
   <link rel="canonical" href="https://laser.vivace-beauty.pt/">
   <meta name="robots" content="noindex, nofollow">
   <meta name="theme-color" content="#131110">
@@ -72,7 +72,7 @@
         "@id": "https://laser.vivace-beauty.pt/#laser-podologico",
         "name": "Laser podológico",
         "serviceType": "Tratamento podológico a laser",
-        "description": "Tratamento a laser para fungos das unhas (onicomicose), calos e verrugas plantares em Peniche.",
+        "description": "Tratamento a laser para fungos das unhas (onicomicose), calos e verrugas plantares em Peniche, sem cortes nem anestesia.",
         "provider": { "@id": "https://vivace-beauty.pt/#negocio" },
         "areaServed": { "@type": "City", "name": "Peniche" },
         "url": "https://laser.vivace-beauty.pt/#laser-podologico"
@@ -210,6 +210,25 @@
     .card p{ color:var(--ink-soft); }
     .card .btn{ margin-top:20px; }
 
+    /* Laser podológico — destaque */
+    .badge{ display:inline-flex; align-items:center; gap:10px; font-size:14px; font-weight:700; color:var(--gold-ink); background:var(--gold); padding:8px 16px; border-radius:var(--r-pill); margin-bottom:20px; }
+    .dot{ width:8px; height:8px; border-radius:50%; background:currentColor; flex-shrink:0; }
+    .podo-sec{ padding-top:calc(var(--sec) + 8px); padding-bottom:calc(var(--sec) + 8px); }
+    .podo-head{ max-width:760px; margin-bottom:48px; }
+    .podo-title{ font-size:clamp(36px, 9vw, 60px); margin-bottom:16px; }
+    .podo-head .lead{ margin-bottom:28px; }
+    .podo-head .btns .btn{ flex:1 1 240px; }
+    @media (min-width:600px){ .podo-head .btns .btn{ flex:0 0 auto; } }
+    .podo-sub{ font-family:var(--font-body); font-size:13px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--gold); margin-bottom:16px; }
+    .podo-grid{ display:grid; gap:16px; }
+    @media (min-width:900px){ .podo-grid{ grid-template-columns:repeat(3,1fr); gap:20px; } }
+    .podo-grid .card h3::before{ content:""; display:block; width:32px; height:3px; border-radius:2px; background:var(--gold); margin-bottom:14px; }
+    .podo-checks{ margin-top:32px; max-width:760px; }
+    .hero-news{ display:flex; align-items:center; gap:10px; margin-top:20px; padding:12px 16px; border:1px solid var(--gold); border-radius:var(--r-sm); color:var(--ink); text-decoration:none; font-size:15px; line-height:1.4; }
+    .hero-news .dot{ color:var(--gold); }
+    .hero-news b{ color:var(--gold); }
+    .hero-news span:last-child{ margin-left:auto; color:var(--gold); }
+    .hero-news:hover{ background:rgba(233,199,154,.08); }
     /* Laser podológico */
     .podo{ display:grid; gap:28px; }
     @media (min-width:900px){ .podo{ grid-template-columns:1fr 1fr; gap:48px; align-items:center; } }
@@ -281,9 +300,9 @@
     <div class="wrap">
       <a class="logo" href="https://vivace-beauty.pt/" aria-label="Vivace Beauty — página principal">Vivace<span>.</span>Beauty</a>
       <nav aria-label="Secções">
+        <a href="#laser-podologico">Laser podológico</a>
         <a href="#como-funciona">Como funciona</a>
         <a href="#precos">Preços</a>
-        <a href="#laser-podologico">Laser podológico</a>
         <a href="#perguntas">Perguntas</a>
         <a href="#onde">Onde estamos</a>
       </nav>
@@ -309,6 +328,7 @@
               919 828 555
             </a>
           </div>
+          <a class="hero-news" href="#laser-podologico" data-umami-event="laser-hero-podologico"><span class="dot" aria-hidden="true"></span><span><b>Novidade:</b> laser podológico, único em Peniche e arredores</span><span aria-hidden="true">→</span></a>
           <ul class="trust">
             <li><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7.1L12 17.3 5.8 21l1.6-7.1L2 9.2l7.1-.6z"/></svg>5,0 no Google</li>
             <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="9.5" r="2.5" stroke="currentColor" stroke-width="2"/></svg>R. do Lapadusso 28, Peniche</li>
@@ -321,8 +341,48 @@
       </div>
     </section>
 
-    <!-- 2. COMO FUNCIONA -->
-    <section id="como-funciona" class="band" aria-labelledby="t-como">
+    <!-- 2. LASER PODOLÓGICO — NOVIDADE -->
+    <section id="laser-podologico" class="band podo-sec" aria-labelledby="t-podo">
+      <div class="wrap">
+        <div class="podo-head">
+          <p class="badge"><span class="dot" aria-hidden="true"></span>Novidade · Único em Peniche e arredores</p>
+          <h2 id="t-podo" class="podo-title">Laser podológico <span class="gold">em Peniche</span></h2>
+          <p class="lead">Já não precisa de ir para fora para tratar os pés com laser. Tratamento avançado para fungos das unhas, calos e verrugas plantares, sem dor e sem tempo de paragem.</p>
+          <div class="btns">
+            <a class="btn btn-primary" href="https://wa.me/351919828555?text=Ol%C3%A1!%20Gostaria%20de%20marcar%20uma%20avalia%C3%A7%C3%A3o%20de%20laser%20podol%C3%B3gico." target="_blank" rel="noopener" data-umami-event="laser-whatsapp" data-umami-event-local="podologico">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 5h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H9l-5 4V6a1 1 0 0 1 1-1z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+              Marcar avaliação podológica
+            </a>
+            <a class="btn btn-ghost" href="tel:+351919828555" data-umami-event="laser-ligar" data-umami-event-local="podologico">Ligar 919 828 555</a>
+          </div>
+        </div>
+
+        <h3 class="podo-sub">O que tratamos</h3>
+        <ul class="podo-grid">
+          <li class="card">
+            <h3>Fungos das unhas</h3>
+            <p>Onicomicose: unhas amareladas, grossas ou quebradiças. O laser atua sobre o fungo sem cortes nem anestesia.</p>
+          </li>
+          <li class="card">
+            <h3>Calos</h3>
+            <p>Tratamento a laser dos calos que incomodam ao andar, sem tempo de paragem.</p>
+          </li>
+          <li class="card">
+            <h3>Verrugas plantares</h3>
+            <p>Verrugas na planta do pé tratadas a laser, sem dor e sem recuperação.</p>
+          </li>
+        </ul>
+
+        <ul class="checks podo-checks">
+          <li>Trata os fungos das unhas de forma eficaz e segura</li>
+          <li>Sem cortes, sem anestesia, sem recuperação</li>
+          <li>Resultados visíveis logo nas primeiras sessões</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 2b. COMO FUNCIONA (depilação) -->
+    <section id="como-funciona" class="sep" aria-labelledby="t-como">
       <div class="wrap">
         <div class="head">
           <p class="eyebrow">Como funciona</p>
@@ -380,32 +440,8 @@
       </div>
     </section>
 
-    <!-- 3b. LASER PODOLÓGICO -->
-    <section id="laser-podologico" class="band" aria-labelledby="t-podo">
-      <div class="wrap">
-        <div class="podo">
-          <div>
-            <p class="eyebrow">Também na clínica</p>
-            <h2 id="t-podo">Laser podológico <span class="gold">em Peniche</span></h2>
-            <p class="lead">Tratamento a laser para fungos das unhas (onicomicose), calos e verrugas plantares, sem dor e sem tempo de paragem.</p>
-          </div>
-          <div class="card">
-            <ul class="checks">
-              <li>Trata os fungos das unhas de forma eficaz e segura</li>
-              <li>Sem cortes, sem anestesia, sem recuperação</li>
-              <li>Resultados visíveis logo nas primeiras sessões</li>
-            </ul>
-            <div class="btns">
-              <a class="btn btn-primary" href="https://wa.me/351919828555?text=Ol%C3%A1!%20Gostaria%20de%20marcar%20uma%20avalia%C3%A7%C3%A3o%20de%20laser%20podol%C3%B3gico." target="_blank" rel="noopener" data-umami-event="laser-whatsapp" data-umami-event-local="podologico">Marcar avaliação</a>
-              <a class="btn btn-ghost" href="tel:+351919828555" data-umami-event="laser-ligar" data-umami-event-local="podologico">Ligar 919 828 555</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- 4. PORQUÊ -->
-    <section class="sep" aria-labelledby="t-porque">
+    <section class="band" aria-labelledby="t-porque">
       <div class="wrap">
         <div class="head">
           <p class="eyebrow">Porquê na Vivace</p>
