@@ -298,6 +298,100 @@ export function NatalBanner({ language = "pt" }) {
   );
 }
 
+/* ---------- Secção "Calendário de beleza para as festas" (depois dos Serviços) ---------- */
+const calTextos = {
+  pt: {
+    tag: "Calendário de beleza",
+    titulo: ["Chega às festas", "pronta a brilhar"],
+    intro: "Para tudo estar perfeito na Consoada e na Passagem de Ano, cada serviço tem o seu momento. Marca com tempo e escolhe os dias que te dão jeito.",
+    natal: (d) => (d === 1 ? "dia para o Natal" : "dias para o Natal"),
+    ano: (d) => (d === 1 ? "dia para o Ano Novo" : "dias para o Ano Novo"),
+    marcar: "Marcar",
+    passos: [
+      { quando: "3 a 4 semanas antes", t: "Cor e corte", d: "A cor assenta e o corte ganha forma até às festas.", tel: "geral", msg: "Olá! Gostava de marcar cor/corte de cabelo antes do Natal." },
+      { quando: "1 a 2 semanas antes", t: "Pestanas e sobrancelhas", d: "Olhar definido e natural para as fotos de família.", tel: "geral", msg: "Olá! Gostava de marcar pestanas/sobrancelhas antes do Natal." },
+      { quando: "2 a 3 dias antes", t: "Unhas de Natal", d: "Gel ou nail art acabadinhos para a Consoada.", tel: "unhas", msg: "Olá! Gostava de marcar as unhas para o Natal / Passagem de Ano. Que dias têm disponíveis?" },
+      { quando: "No próprio dia", t: "Brushing ou penteado", d: "Para chegares à mesa pronta a brilhar.", tel: "geral", msg: "Olá! Gostava de marcar um brushing/penteado para o Natal ou a Passagem de Ano." },
+    ],
+    cta: "Planear as minhas marcações",
+    ctaMsg: "Olá! Queria marcar vários serviços para as festas (cabelo, unhas, pestanas). Podem ajudar-me a escolher os dias?",
+  },
+  en: {
+    tag: "Beauty calendar",
+    titulo: ["Arrive at the parties", "ready to shine"],
+    intro: "For everything to look perfect at Christmas and New Year's Eve, each treatment has its moment. Book early and pick the days that suit you.",
+    natal: (d) => (d === 1 ? "day to Christmas" : "days to Christmas"),
+    ano: (d) => (d === 1 ? "day to New Year" : "days to New Year"),
+    marcar: "Book",
+    passos: [
+      { quando: "3 to 4 weeks before", t: "Colour and cut", d: "Colour settles and the cut takes shape in time for the parties.", tel: "geral", msg: "Hi! I'd like to book a hair colour/cut before Christmas." },
+      { quando: "1 to 2 weeks before", t: "Lashes and brows", d: "A defined, natural look for the family photos.", tel: "geral", msg: "Hi! I'd like to book lashes/brows before Christmas." },
+      { quando: "2 to 3 days before", t: "Christmas nails", d: "Gel or nail art freshly done for Christmas Eve.", tel: "unhas", msg: "Hi! I'd like to book my nails for Christmas / New Year's Eve. Which days do you have available?" },
+      { quando: "On the day", t: "Blow-dry or updo", d: "So you arrive at the table ready to shine.", tel: "geral", msg: "Hi! I'd like to book a blow-dry/updo for Christmas or New Year's Eve." },
+    ],
+    cta: "Plan my appointments",
+    ctaMsg: "Hi! I'd like to book several treatments for the holidays (hair, nails, lashes). Can you help me pick the days?",
+  },
+};
+
+function contagem(hoje = new Date()) {
+  const ano = hoje.getFullYear();
+  const meia = new Date(ano, hoje.getMonth(), hoje.getDate());
+  let natal = new Date(ano, 11, 25);
+  if (meia > natal) natal = null;
+  const anoNovo = new Date(hoje.getMonth() === 0 ? ano : ano + 1, 0, 1);
+  const dias = (d) => Math.round((d - meia) / 864e5);
+  if (natal) return { tipo: "natal", n: dias(natal) };
+  return { tipo: "ano", n: dias(anoNovo) };
+}
+
+export function NatalCalendario({ language = "pt" }) {
+  const [ativo] = useState(() => natalAtivo());
+  const [cont, setCont] = useState(null); // calculado no browser (o HTML pré-renderizado é de outro dia)
+  useEffect(() => { setCont(contagem()); }, []);
+  if (!ativo) return null;
+  const t = calTextos[language] || calTextos.pt;
+  const wa = (tel, msg) => `https://wa.me/${tel === "unhas" ? TELEFONE_UNHAS : TELEFONE}?text=${encodeURIComponent(msg)}`;
+  return (
+    <section className="natal-cal" id="calendario-natal" aria-labelledby="natal-cal-t">
+      <div className="nc-in">
+        <div className="nc-topo">
+          <div>
+            <p className="nc-tag">✦ {t.tag}</p>
+            <h2 id="natal-cal-t">{t.titulo[0]} <span>{t.titulo[1]}</span></h2>
+            <p className="nc-intro">{t.intro}</p>
+          </div>
+          {cont && cont.n > 0 && (
+            <div className="nc-contador" aria-live="polite">
+              <Presente className="nc-contador-presente" cor="#2f5d3a" fita="#c8102e" />
+              <strong>{cont.n}</strong>
+              <span>{cont.tipo === "natal" ? t.natal(cont.n) : t.ano(cont.n)}</span>
+            </div>
+          )}
+        </div>
+
+        <ol className="nc-passos">
+          {t.passos.map((p, i) => (
+            <li key={p.t} className="nc-passo">
+              <span className="nc-num" aria-hidden="true">{i + 1}</span>
+              <p className="nc-quando">{p.quando}</p>
+              <h3>{p.t}</h3>
+              <p className="nc-desc">{p.d}</p>
+              <a href={wa(p.tel, p.msg)} target="_blank" rel="noopener noreferrer" className="nc-link" data-umami-event="natal-calendario-marcar" data-umami-event-passo={i + 1}>
+                {t.marcar} →
+              </a>
+            </li>
+          ))}
+        </ol>
+
+        <div className="nc-cta">
+          <a className="nb-btn nc-btn" href={wa("geral", t.ctaMsg)} target="_blank" rel="noopener noreferrer" data-umami-event="natal-calendario-planear">{t.cta}</a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* =========================================================
    MÚSICA DE NATAL — "Jingle Bells" (melodia de 1857, domínio público)
    tocada com o Web Audio API: nenhum ficheiro de áudio, nenhuns direitos.

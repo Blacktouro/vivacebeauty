@@ -9,7 +9,7 @@ import Helen from "./components/Helen";
 import Thamy from "./components/Thamy";
 import Wilza from "./components/Wilza";
 import Novidades from "./components/Novidades";
-import Natal, { natalAtivo, NatalBanner } from "./components/Natal";
+import Natal, { natalAtivo, NatalBanner, NatalCalendario } from "./components/Natal";
 import AgendamentoWhatsApp from "./components/AgendamentoWhatsApp";
 
 import GaleriaFaixas from "./components/GaleriaFaixas";
@@ -254,15 +254,17 @@ function App() {
         id="conteudo-principal"
         tabIndex="-1"
       >
+        <NatalBanner language={language} />
+
         <Hero language={language} />
 
         <Sobre language={language} />
 
-        <NatalBanner language={language} />
-
         <Novidades language={language} />
 
         <Servicos language={language} />
+
+        <NatalCalendario language={language} />
 
         <Helen language={language} />
 
