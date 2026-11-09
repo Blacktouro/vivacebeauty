@@ -4,7 +4,7 @@ import "../styles/natal.css";
 /**
  * Tema de Natal da Vivace Beauty
  * ------------------------------
- * Liga-se sozinho de 1 de dezembro a 6 de janeiro.
+ * Liga-se sozinho de 9 de novembro a 6 de janeiro (muda INICIO/FIM abaixo).
  * Para ver antes (ou testar): https://vivace-beauty.pt/?natal=1
  * Para desligar à força:       https://vivace-beauty.pt/?natal=0
  *
@@ -16,21 +16,36 @@ import "../styles/natal.css";
  *  - acentos vermelhos (classe "natal" no <html>, ver natal.css)
  */
 
-const TELEFONE = "351910624152";
+const TELEFONE = "351910624152"; // marcações gerais
+const TELEFONE_UNHAS = "351912088636"; // unhas (o mesmo do agendamento de Unhas)
+
+// Período do tema: [mês (1-12), dia]
+const INICIO = [11, 9];
+const FIM = [1, 6];
 
 const textos = {
   pt: {
     faixa: "Boas Festas da Vivace Beauty",
-    sub: "Garanta já o seu look para o Natal e a Passagem de Ano.",
-    botao: "Marcar agora",
-    msg: "Olá! Gostaria de marcar um atendimento para as festas de Natal / Passagem de Ano.",
+    mensagens: [
+      "Boas Festas da Vivace Beauty",
+      "Unhas de Natal: gel, nail art e as cores das festas",
+      "Marca já as tuas unhas para o Natal e a Passagem de Ano",
+      "Marca cedo e escolhe o dia que te dá mais jeito",
+    ],
+    botao: "Marcar unhas",
+    msg: "Olá! Gostava de marcar as unhas para o Natal / Passagem de Ano. Que dias têm disponíveis?",
     fechar: "Fechar mensagem de Natal",
   },
   en: {
     faixa: "Season's greetings from Vivace Beauty",
-    sub: "Book your look for Christmas and New Year's Eve.",
-    botao: "Book now",
-    msg: "Hi! I'd like to book an appointment for Christmas / New Year's Eve.",
+    mensagens: [
+      "Season's greetings from Vivace Beauty",
+      "Christmas nails: gel, nail art and festive colours",
+      "Book your nails for Christmas and New Year's Eve",
+      "Book early and pick the day that suits you",
+    ],
+    botao: "Book nails",
+    msg: "Hi! I'd like to book my nails for Christmas / New Year's Eve. Which days do you have available?",
     fechar: "Close Christmas message",
   },
 };
@@ -43,9 +58,10 @@ export function natalAtivo(hoje = new Date()) {
   } catch {
     /* sem window */
   }
-  const m = hoje.getMonth(); // 0 = janeiro
-  const d = hoje.getDate();
-  return m === 11 || (m === 0 && d <= 6);
+  const hojeN = (hoje.getMonth() + 1) * 100 + hoje.getDate(); // ex.: 1209 = 9 dez
+  const ini = INICIO[0] * 100 + INICIO[1];
+  const fim = FIM[0] * 100 + FIM[1];
+  return ini <= fim ? hojeN >= ini && hojeN <= fim : hojeN >= ini || hojeN <= fim;
 }
 
 function Neve() {
@@ -166,15 +182,26 @@ export default function Natal({ language = "pt" }) {
         <div className="natal-faixa" role="region" aria-label={t.faixa}>
           <div className="natal-faixa-in">
             <Gorro className="natal-faixa-gorro" />
-            <p>
-              <strong>{t.faixa}</strong> <span>{t.sub}</span>
-            </p>
+            <p className="sr-only">{t.mensagens.join(". ")}</p>
+            <div className="natal-ticker" aria-hidden="true">
+              <div className="natal-ticker-track">
+                {[0, 1].map((k) => (
+                  <div className="natal-ticker-grupo" key={k}>
+                    {t.mensagens.map((m) => (
+                      <span key={m}>
+                        <i>✦</i> {m}
+                      </span>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </div>
             <a
               className="natal-faixa-btn"
-              href={`https://wa.me/${TELEFONE}?text=${encodeURIComponent(t.msg)}`}
+              href={`https://wa.me/${TELEFONE_UNHAS}?text=${encodeURIComponent(t.msg)}`}
               target="_blank"
               rel="noopener noreferrer"
-              data-umami-event="natal-marcar"
+              data-umami-event="natal-marcar-unhas"
             >
               {t.botao}
             </a>

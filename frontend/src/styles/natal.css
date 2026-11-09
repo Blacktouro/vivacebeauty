@@ -91,12 +91,56 @@
 .natal-faixa a:focus-visible,
 .natal-faixa button:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
 
+/* Mensagens a passar */
+.natal-ticker {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+.natal-ticker-track {
+  display: flex;
+  width: max-content;
+  animation: natal-passar 38s linear infinite;
+}
+.natal-faixa:hover .natal-ticker-track,
+.natal-faixa:focus-within .natal-ticker-track { animation-play-state: paused; }
+.natal-ticker-grupo { display: flex; flex-shrink: 0; }
+.natal-ticker-grupo span {
+  white-space: nowrap;
+  padding-right: 42px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+.natal-ticker-grupo span:first-child {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 16px;
+}
+.natal-ticker-grupo i { font-style: normal; color: #f0c48a; margin-right: 4px; }
+@keyframes natal-passar {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.sr-only {
+  position: absolute !important;
+  width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .natal-ticker-track { animation: none; }
+}
+
 @media (max-width: 640px) {
-  .natal-faixa-in { gap: 10px; padding: 8px 44px 8px 12px; }
-  .natal-faixa-gorro { width: 28px; height: 22px; }
-  .natal-faixa p span { display: none; }
-  .natal-faixa strong { font-size: 15px; margin: 0; }
-  .natal-faixa-btn { min-height: 36px; padding: 6px 14px; font-size: 13px; }
+  /* telemóvel: mensagens a toda a largura, botão por baixo */
+  .natal-faixa-in { flex-wrap: wrap; justify-content: center; gap: 6px 10px; padding: 8px 0 10px; }
+  .natal-faixa-gorro { display: none; }
+  .natal-ticker { flex: 1 1 100%; order: 1; }
+  .natal-ticker-grupo span { font-size: 14px; padding-right: 32px; }
+  .natal-ticker-track { animation-duration: 30s; }
+  .natal-faixa-btn { order: 2; margin-left: 0; min-height: 34px; padding: 5px 16px; font-size: 13px; }
+  .natal-faixa-x { order: 3; position: static; transform: none; width: 34px; height: 34px; font-size: 20px; }
 }
 
 /* Gorro no logótipo */
