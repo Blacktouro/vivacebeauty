@@ -1,0 +1,7 @@
+services:
+  laser:
+    build: .
+    container_name: vivace_laser
+    restart: always
+    ports:
+      - "127.0.0.1:5174:80"

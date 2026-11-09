@@ -25,10 +25,17 @@ const CIDADE = "Peniche";
 const URL_SITE = "https://www.vivace-beauty.pt";
 
 // Contacto para marcações
-const TELEFONE_VISIVEL = "912 088 636";
-const TELEFONE_INTERNACIONAL = "351912088636"; // sem "+" nem espaços
+const TELEFONE_VISIVEL = "919 828 555";
+const TELEFONE_INTERNACIONAL = "351919828555"; // sem "+" nem espaços
 
 const PASTA_IMAGENS = "/IMG";
+
+// Página própria dos tratamentos a laser (subdomínio)
+const URL_LASER = "https://laser.vivace-beauty.pt/";
+const LINKS_LASER = {
+  "laser-podologico": `${URL_LASER}#laser-podologico`,
+  "depilacao-laser": URL_LASER,
+};
 
 // As fotos são as mesmas nas duas línguas
 const IMAGENS = {
@@ -51,6 +58,8 @@ const content = {
     booking: "Marcações:",
     whatsappBtn: "Marcar pelo WhatsApp",
     callBtn: "Ligar",
+    moreBtn: "Saber mais",
+    moreAria: (titulo) => `Saber mais sobre ${titulo}`,
     whatsappAria: (titulo) => `Marcar ${titulo} pelo WhatsApp, ${TELEFONE_VISIVEL}`,
     callAria: `Ligar para a ${NOME_CLINICA}, ${TELEFONE_VISIVEL}`,
     items: [
@@ -77,7 +86,7 @@ const content = {
         beneficios: [
           "Tecnologia indolor adaptada a cada tipo de pele",
           "Menos pelos encravados e irritação",
-          "Pacotes de sessões com preços especiais de lançamento",
+          "Laser díodo para rosto e corpo",
         ],
         imagemAlt: `Sessão de depilação a laser profissional em ${CIDADE}`,
         mensagemWhatsApp: `Olá! Gostaria de marcar uma sessão de depilação a laser na ${NOME_CLINICA}.`,
@@ -95,6 +104,8 @@ const content = {
     booking: "Bookings:",
     whatsappBtn: "Book on WhatsApp",
     callBtn: "Call",
+    moreBtn: "Learn more",
+    moreAria: (titulo) => `Learn more about ${titulo}`,
     whatsappAria: (titulo) => `Book ${titulo} on WhatsApp, ${TELEFONE_VISIVEL}`,
     callAria: `Call ${NOME_CLINICA}, ${TELEFONE_VISIVEL}`,
     items: [
@@ -121,7 +132,7 @@ const content = {
         beneficios: [
           "Painless technology adapted to every skin type",
           "Fewer ingrown hairs and less irritation",
-          "Session packages with special launch prices",
+          "Diode laser for face and body",
         ],
         imagemAlt: `Professional laser hair removal session in ${CIDADE}`,
         mensagemWhatsApp: `Hi! I'd like to book a laser hair removal session at ${NOME_CLINICA}.`,
@@ -249,6 +260,16 @@ export default function NovidadesSection({ language = "pt" }) {
                 >
                   <IconeTelefone />
                   {t.callBtn} {TELEFONE_VISIVEL}
+                </a>
+                <a
+                  className="vb-btn"
+                  href={LINKS_LASER[item.id]}
+                  style={styles.btnLink}
+                  data-umami-event="novidades-saber-mais"
+                  data-umami-event-servico={item.id}
+                  aria-label={t.moreAria(item.titulo)}
+                >
+                  {t.moreBtn} →
                 </a>
               </div>
             </div>
@@ -408,6 +429,14 @@ const styles = {
     background: palette.gold,
     color: "#1D1712",
     border: `1px solid ${palette.gold}`,
+  },
+  btnLink: {
+    ...botaoBase,
+    background: "transparent",
+    color: palette.gold,
+    border: "1px solid transparent",
+    textDecoration: "underline",
+    textUnderlineOffset: 4,
   },
   btnSecundario: {
     ...botaoBase,
