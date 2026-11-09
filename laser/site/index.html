@@ -75,6 +75,7 @@
         "description": "Tratamento a laser para fungos das unhas (onicomicose), calos e verrugas plantares em Peniche, sem cortes nem anestesia.",
         "provider": { "@id": "https://vivace-beauty.pt/#negocio" },
         "areaServed": { "@type": "City", "name": "Peniche" },
+        "image": "https://laser.vivace-beauty.pt/img/laser-podologico.webp",
         "url": "https://laser.vivace-beauty.pt/#laser-podologico"
       },
       {
@@ -183,9 +184,9 @@
     .trust{ display:flex; flex-wrap:wrap; gap:8px 20px; margin-top:24px; font-size:15px; color:var(--ink-soft); }
     .trust li{ display:flex; align-items:center; gap:8px; }
     .trust svg{ width:16px; height:16px; color:var(--gold); }
-    .photo{ aspect-ratio:4/5; border-radius:var(--r-md); border:1px solid var(--line); background:linear-gradient(160deg,#2A231C 0%, var(--surface) 70%); display:grid; place-items:center; text-align:center; padding:24px; overflow:hidden; }
-    .photo img{ width:100%; height:100%; object-fit:cover; }
-    @media (max-width:899px){ .photo{ aspect-ratio:16/10; } }
+    .photo{ aspect-ratio:4/5; border-radius:var(--r-md); border:1px solid var(--line); background:var(--surface); overflow:hidden; }
+    .photo img{ width:100%; height:100%; object-fit:cover; object-position:50% 40%; }
+    @media (max-width:899px){ .photo{ aspect-ratio:4/3; } }
 
     /* Passos */
     .steps{ display:grid; gap:16px; counter-reset:passo; }
@@ -214,7 +215,12 @@
     .badge{ display:inline-flex; align-items:center; gap:10px; font-size:14px; font-weight:700; color:var(--gold-ink); background:var(--gold); padding:8px 16px; border-radius:var(--r-pill); margin-bottom:20px; }
     .dot{ width:8px; height:8px; border-radius:50%; background:currentColor; flex-shrink:0; }
     .podo-sec{ padding-top:calc(var(--sec) + 8px); padding-bottom:calc(var(--sec) + 8px); }
-    .podo-head{ max-width:760px; margin-bottom:48px; }
+    .podo-top{ display:grid; gap:32px; margin-bottom:48px; }
+    @media (min-width:900px){ .podo-top{ grid-template-columns:1.15fr .85fr; gap:56px; align-items:center; } }
+    .podo-head{ max-width:760px; }
+    .podo-photo{ border-radius:var(--r-md); overflow:hidden; border:1px solid var(--line); aspect-ratio:4/5; background:var(--surface); }
+    .podo-photo img{ width:100%; height:100%; object-fit:cover; }
+    @media (max-width:899px){ .podo-photo{ aspect-ratio:1/1; } .podo-photo img{ object-position:50% 70%; } }
     .podo-title{ font-size:clamp(36px, 9vw, 60px); margin-bottom:16px; }
     .podo-head .lead{ margin-bottom:28px; }
     .podo-head .btns .btn{ flex:1 1 240px; }
@@ -335,8 +341,7 @@
           </ul>
         </div>
         <div class="photo">
-          <!-- Trocar por: <img src="/img/laser-sala.webp" width="800" height="1000" alt="Sala de depilação a laser da Vivace Beauty em Peniche" fetchpriority="high"> -->
-          <span class="ph">[FOTO: sala ou equipamento de laser]</span>
+          <img src="/img/laser-equipamento.webp" width="900" height="1197" alt="Equipamento de laser díodo da Vivace Beauty em Peniche" fetchpriority="high" decoding="async">
         </div>
       </div>
     </section>
@@ -344,6 +349,7 @@
     <!-- 2. LASER PODOLÓGICO — NOVIDADE -->
     <section id="laser-podologico" class="band podo-sec" aria-labelledby="t-podo">
       <div class="wrap">
+        <div class="podo-top">
         <div class="podo-head">
           <p class="badge"><span class="dot" aria-hidden="true"></span>Novidade · Único em Peniche e arredores</p>
           <h2 id="t-podo" class="podo-title">Laser podológico <span class="gold">em Peniche</span></h2>
@@ -355,6 +361,11 @@
             </a>
             <a class="btn btn-ghost" href="tel:+351919828555" data-umami-event="laser-ligar" data-umami-event-local="podologico">Ligar 919 828 555</a>
           </div>
+        </div>
+
+        <figure class="podo-photo">
+          <img src="/img/laser-podologico.webp" width="900" height="1200" loading="lazy" decoding="async" alt="Tratamento de laser podológico às unhas dos pés na Vivace Beauty, em Peniche">
+        </figure>
         </div>
 
         <h3 class="podo-sub">O que tratamos</h3>
