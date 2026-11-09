@@ -9,7 +9,7 @@ import Helen from "./components/Helen";
 import Thamy from "./components/Thamy";
 import Wilza from "./components/Wilza";
 import Novidades from "./components/Novidades";
-import Natal, { natalAtivo } from "./components/Natal";
+import Natal, { natalAtivo, NatalBanner } from "./components/Natal";
 import AgendamentoWhatsApp from "./components/AgendamentoWhatsApp";
 
 import GaleriaFaixas from "./components/GaleriaFaixas";
@@ -257,6 +257,8 @@ function App() {
         <Hero language={language} />
 
         <Sobre language={language} />
+
+        <NatalBanner language={language} />
 
         <Novidades language={language} />
 
