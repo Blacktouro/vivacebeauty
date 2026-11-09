@@ -425,6 +425,11 @@ p {
     box-shadow 0.25s ease;
 }
 
+/* Os cartões de serviço são brancos: o título não pode ser branco */
+.service-card .service-content h3 {
+  color: #20251f;
+}
+
 .service-card:hover,
 .pestanas-card:hover,
 .card:hover,
@@ -1094,4 +1099,9 @@ select:focus {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
   }
+}
+/* Menu do telemóvel: texto escuro sobre o fundo claro (antes ficava branco e não se lia) */
+@media (max-width: 1100px) {
+  .nav .nav-mobile-heading span { color: #20251f; }
+  .nav .nav-links a { color: #20251f; }
 }
