@@ -138,17 +138,41 @@ function Servicos({ language }) {
 
               <p className="modal-description">{selectedService.description}</p>
 
-              <div className="modal-services">
-                <h4>{language === "pt" ? "Inclui:" : "Includes:"}</h4>
-                <ul>
-                  {selectedService.services.map((item, index) => (
-                    <li key={index}>
-                      <span className="check-icon">✓</span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              {selectedService.prices ? (
+                <div className="modal-prices">
+                  <h4>{language === "pt" ? "Preçário" : "Price list"}</h4>
+                  <ul className="svc-price-list">
+                    {selectedService.prices.map((row) => (
+                      <li key={row.name} className="svc-price-row">
+                        <span className="svc-price-name">{row.name}</span>
+                        <span className="svc-price-items">
+                          {row.items.map((item) => (
+                            <span key={item.label} className="svc-price-item">
+                              <small>{item.label}</small>
+                              <strong>{item.price}€</strong>
+                            </span>
+                          ))}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                  {selectedService.priceNote && (
+                    <p className="svc-price-note">{selectedService.priceNote}</p>
+                  )}
+                </div>
+              ) : (
+                <div className="modal-services">
+                  <h4>{language === "pt" ? "Inclui:" : "Includes:"}</h4>
+                  <ul>
+                    {selectedService.services.map((item, index) => (
+                      <li key={index}>
+                        <span className="check-icon">✓</span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </Modal.Body>
 
             <Modal.Footer>

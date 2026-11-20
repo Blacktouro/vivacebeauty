@@ -61,6 +61,18 @@ const services = {
       short:
         "Realça o teu olhar com técnicas modernas e um acabamento natural.",
 
+      // Preçário (story da Thamy, nov 2026)
+      prices: [
+        { name: "Lifting", items: [{ label: "Serviço", price: 27 }] },
+        { name: "Volume Brasileiro", items: [{ label: "Aplicação", price: 30 }, { label: "Manutenção", price: 25 }] },
+        { name: "Volume Express", items: [{ label: "Aplicação", price: 40 }, { label: "Manutenção", price: 35 }] },
+        { name: "Egípcio", items: [{ label: "Aplicação", price: 35 }, { label: "Manutenção", price: 30 }] },
+        { name: "Fio a fio", items: [{ label: "Aplicação", price: 30 }, { label: "Manutenção", price: 25 }] },
+        { name: "Efeito Rímel", items: [{ label: "Aplicação", price: 30 }, { label: "Manutenção", price: 25 }] }
+      ],
+      priceNote:
+        "Remoção 10€. O valor da manutenção varia consoante o número de semanas.",
+
       description:
         "As nossas técnicas permitem criar um olhar mais intenso, elegante e adaptado ao formato dos teus olhos.",
 
@@ -211,6 +223,17 @@ const services = {
 
       short:
         "Enhance your eyes with natural or volume lashes.",
+
+      prices: [
+        { name: "Lash Lift", items: [{ label: "Service", price: 27 }] },
+        { name: "Brazilian Volume", items: [{ label: "Full set", price: 30 }, { label: "Refill", price: 25 }] },
+        { name: "Express Volume", items: [{ label: "Full set", price: 40 }, { label: "Refill", price: 35 }] },
+        { name: "Egyptian", items: [{ label: "Full set", price: 35 }, { label: "Refill", price: 30 }] },
+        { name: "Classic (one by one)", items: [{ label: "Full set", price: 30 }, { label: "Refill", price: 25 }] },
+        { name: "Mascara Effect", items: [{ label: "Full set", price: 30 }, { label: "Refill", price: 25 }] }
+      ],
+      priceNote:
+        "Removal €10. Refill price depends on the number of weeks since your last appointment.",
 
       description:
         "Professional eyelash services designed to suit every eye shape.",

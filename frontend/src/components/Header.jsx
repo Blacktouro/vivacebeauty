@@ -42,6 +42,7 @@ function Header({
 }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const [activeSection, setActiveSection] = useState("inicio");
 
   const text = translations[language] || translations.pt;
@@ -67,8 +68,27 @@ function Header({
    * Adiciona um efeito ao cabeçalho depois do scroll.
    */
   useEffect(() => {
+    let lastY = window.scrollY;
+
     function handleScroll() {
-      setScrolled(window.scrollY > 20);
+      const y = window.scrollY;
+      const delta = y - lastY;
+
+      setScrolled(y > 20);
+
+      // Esconde ao descer, volta a aparecer ao subir.
+      // Ignora movimentos pequenos para não "tremer".
+      if (y < 120) {
+        setHidden(false);
+      } else if (delta > 6) {
+        setHidden(true);
+      } else if (delta < -6) {
+        setHidden(false);
+      }
+
+      if (Math.abs(delta) > 6 || y < 120) {
+        lastY = y;
+      }
     }
 
     handleScroll();
@@ -173,7 +193,10 @@ function Header({
 
   return (
     <header
-      className={`header ${scrolled ? "header-scrolled" : ""}`}
+      className={`header ${scrolled ? "header-scrolled" : ""} ${
+        hidden && !open ? "header-hidden" : ""
+      }`}
+      onFocus={() => setHidden(false)}
     >
       <div className="header-container">
         <a
